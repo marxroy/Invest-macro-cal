@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>📊 美股宏观事件日历</title>
+<title>📊 宏观事件日历</title>
 <style>
   :root {
     --bg: #0f1117;
@@ -28,12 +28,24 @@
     line-height: 1.5;
   }
   h1 { font-size: 22px; margin-bottom: 4px; }
-  .subtitle { color: var(--text2); font-size: 13px; margin-bottom: 20px; }
+  .subtitle { color: var(--text2); font-size: 13px; margin-bottom: 8px; }
 
-  .legend {
-    display: flex; gap: 12px; margin-bottom: 20px; font-size: 11px;
-    flex-wrap: wrap; align-items: center;
+  /* ── Tab 切换 ── */
+  .tab-bar {
+    display: flex; gap: 0; margin-bottom: 20px;
+    background: var(--card); border-radius: 10px; overflow: hidden;
   }
+  .tab-btn {
+    flex: 1; padding: 10px 0; text-align: center;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    background: transparent; color: var(--text2); border: none;
+    transition: all 0.2s;
+  }
+  .tab-btn.active { background: var(--accent); color: #fff; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .legend { display: flex; gap: 12px; margin-bottom: 20px; font-size: 11px; flex-wrap: wrap; align-items: center; }
   .legend span { display: flex; align-items: center; gap: 3px; }
   .dot { width: 10px; height: 10px; border-radius: 50%; }
   .dot.f { background: var(--fire); }
@@ -52,14 +64,8 @@
     margin-bottom: 8px; border: 1px solid var(--border);
     display: flex; align-items: flex-start; gap: 12px;
   }
-  .event-date {
-    min-width: 48px; text-align: center;
-    font-size: 20px; font-weight: 800; line-height: 1;
-  }
-  .event-date small {
-    display: block; font-size: 11px; font-weight: 500;
-    color: var(--text2); margin-top: 2px;
-  }
+  .event-date { min-width: 48px; text-align: center; font-size: 20px; font-weight: 800; line-height: 1; }
+  .event-date small { display: block; font-size: 11px; font-weight: 500; color: var(--text2); margin-top: 2px; }
   .event-info { flex: 1; }
   .event-name { font-weight: 600; font-size: 15px; }
   .event-detail { font-size: 12px; color: var(--text2); margin-top: 2px; }
@@ -71,10 +77,7 @@
   .impact-2 { color: var(--text2); }
   .impact-1 { color: var(--text2); font-size: 12px; }
 
-  .badge {
-    display: inline-block; padding: 1px 8px; border-radius: 10px;
-    font-size: 10px; font-weight: 700; margin-left: 6px;
-  }
+  .badge { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; margin-left: 6px; }
   .badge-today { background: var(--fire); color: #fff; }
   .badge-past { background: var(--border); color: var(--text2); }
   .badge-watch { background: rgba(210,153,29,0.2); color: var(--yellow); }
@@ -82,70 +85,44 @@
   .event-card.past { opacity: 0.45; }
   .event-card.today { border: 2px solid var(--fire); background: rgba(255,68,68,0.06); }
 
-  .divider {
-    height: 1px; background: var(--border); margin: 8px 0 20px;
-  }
-  .note {
-    font-size: 12px; color: var(--text2); padding: 12px;
-    background: var(--card); border-radius: 8px; margin-top: 8px;
-  }
-  .future-hint {
-    font-size: 11px; color: var(--green); margin-top: 4px;
-    font-weight: 500;
-  }
-  .section-label {
-    font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
-    color: var(--text2); margin-bottom: 12px; font-weight: 600;
-  }
-  .refresh {
-    text-align: center; font-size: 11px; color: var(--text2);
-    margin-top: 24px; padding-bottom: 30px;
-  }
+  .divider { height: 1px; background: var(--border); margin: 8px 0 20px; }
+  .note { font-size: 12px; color: var(--text2); padding: 12px; background: var(--card); border-radius: 8px; margin-top: 8px; }
+  .future-hint { font-size: 11px; color: var(--green); margin-top: 4px; font-weight: 500; }
+  .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text2); margin-bottom: 12px; font-weight: 600; }
+  .refresh { text-align: center; font-size: 11px; color: var(--text2); margin-top: 24px; padding-bottom: 30px; }
 
-  /* ── ★ 5星评级系统 ── */
-  .stars-bar {
-    display: flex; align-items: center; gap: 6px; margin-top: 6px;
-    font-size: 13px; font-weight: 700;
-  }
+  .stars-bar { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 13px; font-weight: 700; }
   .stars-label { font-size: 11px; color: var(--text2); min-width: 28px; }
   .stars-fill { letter-spacing: 1px; }
   .stars-fill.bear { color: var(--fire); }
   .stars-fill.bull { color: var(--green); }
   .stars-empty { letter-spacing: 1px; color: var(--border); }
-  .net-verdict {
-    display: inline-block; padding: 2px 10px; border-radius: 10px;
-    font-size: 12px; font-weight: 700; margin-left: 6px;
-  }
+  .net-verdict { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 12px; font-weight: 700; margin-left: 6px; }
   .verdict-bear { background: rgba(255,68,68,0.15); color: var(--fire); }
   .verdict-bull { background: rgba(63,185,80,0.15); color: var(--green); }
   .verdict-neutral { background: rgba(210,153,29,0.15); color: var(--yellow); }
 
-  .analysis-box {
-    margin-top: 10px; padding: 10px 12px;
-    border-radius: 6px; border: 1px solid;
-  }
+  .analysis-box { margin-top: 10px; padding: 10px 12px; border-radius: 6px; border: 1px solid; }
   .analysis-box.bear { background: rgba(255,68,68,0.05); border-color: rgba(255,68,68,0.15); }
   .analysis-box.bull { background: rgba(63,185,80,0.05); border-color: rgba(63,185,80,0.15); }
   .analysis-title { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
   .analysis-title.red { color: var(--red); }
   .analysis-title.green { color: var(--green); }
-  .analysis-row {
-    display: flex; justify-content: space-between; 
-    font-size: 12px; padding: 2px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-  }
+  .analysis-row { display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
   .analysis-row span:first-child { color: var(--text2); }
-  .analysis-body {
-    margin-top: 8px; font-size: 12px; line-height: 1.7;
-    color: var(--text); padding: 8px;
-    background: rgba(0,0,0,0.15); border-radius: 4px;
-  }
+  .analysis-body { margin-top: 8px; font-size: 12px; line-height: 1.7; color: var(--text); padding: 8px; background: rgba(0,0,0,0.15); border-radius: 4px; }
 </style>
 </head>
 <body>
 
-<h1>📊 美股宏观事件日历</h1>
-<p class="subtitle">更新于 2026-06-05 盘后 · 每周一自动刷新</p>
+<h1>📊 宏观事件日历</h1>
+<p class="subtitle">更新于 2026-06-05 盘后 · 每周一 08:00 自动刷新</p>
+
+<!-- Tab 切换 -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('us')">🇺🇸 美股</button>
+  <button class="tab-btn" onclick="switchTab('cn')">🇨🇳 A股</button>
+</div>
 
 <div class="legend">
   <span><span class="dot f"></span> 核弹级</span>
@@ -159,23 +136,21 @@
   <span style="font-size:10px;color:var(--text2);">评级含6维：数据/趋势/资产/宏观/范式/技术位置</span>
 </div>
 
-<!-- ==================== TODAY ==================== -->
+<!-- ======== 美股 Tab ======== -->
+<div id="tab-us" class="tab-panel active">
+
 <div class="section-label">⚡ 今天 · 6月5日（周四）</div>
 
-<!-- NFP -->
 <div class="event-card today">
   <div class="event-date"><small>6月</small>5</div>
   <div class="event-info">
     <div class="event-name">非农 NFP（5月） <span class="badge badge-today">今日</span></div>
     <div class="event-detail">实际 <strong style="color:var(--fire)">17.2万</strong> · 大超预期（预估 ~12万）</div>
     <div class="stars-bar">
-      <span class="stars-label">看空</span>
-      <span class="stars-fill bear">★★★★★</span>
-      <span class="net-verdict verdict-bear">强烈看空 5/5</span>
+      <span class="stars-label">看空</span><span class="stars-fill bear">★★★★★</span><span class="net-verdict verdict-bear">强烈看空 5/5</span>
     </div>
     <div class="stars-bar" style="margin-top:2px;">
-      <span class="stars-label">看多</span>
-      <span class="stars-fill bull">★</span><span class="stars-empty">★★★★</span>
+      <span class="stars-label">看多</span><span class="stars-fill bull">★</span><span class="stars-empty">★★★★</span>
     </div>
     <div class="analysis-box bear">
       <div class="analysis-title red">📈 好数据 = 坏消息 · 范式级利空</div>
@@ -187,39 +162,27 @@
         <strong>⚡ 5星看空的理由</strong><br>
         ① 不是数据差——是数据太好，导致 Fed 可能<strong>加息</strong>而非降息<br>
         ② 范式切换：市场从「坏消息=好消息（Fed救）」→「好消息=好消息…但Fed不降息=坏消息」<br>
-        ③ 伊朗战争推升能源 PCE 逼近 4% + 劳动力过热 = <strong>滞胀剧本</strong><br>
-        ④ 这不是回调，是估值体系重定价<br><br>
-        <strong>⚠️ Roy：</strong>今天纳指-3.89%是你 ASTS 618 CALL 的黑色星期四。
-        唯一对冲：<strong>SQQQ CALL 日内</strong>。6/10 CPI 是下游第一道生死关口。
+        ③ 伊朗战争推升能源 PCE 逼近 4% + 劳动力过热 = <strong>滞胀剧本</strong><br><br>
+        <strong>⚠️ Roy：</strong>纳指-3.89%是 ASTS 618 CALL 的黑色星期四。唯一对冲：<strong>SQQQ CALL</strong>。
       </div>
     </div>
   </div>
 </div>
 
-<!-- Jobless Claims -->
 <div class="event-card today">
   <div class="event-date"><small>6月</small>5</div>
   <div class="event-info">
     <div class="event-name">初请失业金人数 <span class="badge badge-today">今日</span></div>
     <div class="event-detail">实际 <strong style="color:var(--fire)">22.5万</strong> · 预期 22.3万 · 前值 21.2万</div>
     <div class="stars-bar">
-      <span class="stars-label">看空</span>
-      <span class="stars-fill bear">★★★</span><span class="stars-empty">★★</span>
-      <span class="net-verdict verdict-bear">看空 3/5</span>
-    </div>
-    <div class="stars-bar" style="margin-top:2px;">
-      <span class="stars-label">看多</span>
-      <span class="stars-fill bull">★</span><span class="stars-empty">★★★★</span>
+      <span class="stars-label">看空</span><span class="stars-fill bear">★★★</span><span class="stars-empty">★★</span><span class="net-verdict verdict-bear">看空 3/5</span>
     </div>
     <div class="analysis-box bear">
-      <div class="analysis-title red">📉 趋势恶化 · 偏离不大但方向明确</div>
-      <div class="analysis-row"><span>初请趋势</span><span>200K → 209K → 211K → 209K → 215K → <strong style="color:var(--fire)">225K</strong>（连续4周上升）</span></div>
+      <div class="analysis-title red">📉 趋势恶化 · 连续4周上升</div>
+      <div class="analysis-row"><span>初请趋势</span><span>200K→209K→211K→209K→215K→<strong style="color:var(--fire)">225K</strong></span></div>
       <div class="analysis-row"><span>四周均值</span><span>208K → <strong style="color:var(--fire)">214.8K</strong>（+6,500）</span></div>
-      <div class="analysis-row"><span>市场确认</span><span>纳指同步暴跌，在用脚投票</span></div>
       <div class="analysis-body">
-        <strong>3星而非5星理由：</strong>数据偏离幅度不大（+2K），但趋势4周不可否认。
-        真正狠的是它和 NFP 形成<strong>双杀</strong>——就业强（Fed不敢鸽）+ 失业苗头（经济在软），
-        两者叠加是教科书级的 <strong>滞胀前兆</strong>。
+        NFP好+初请恶化=<strong>滞胀双杀</strong>——就业强得Fed不敢鸽，失业苗头说明经济开始软。
       </div>
     </div>
   </div>
@@ -227,186 +190,226 @@
 
 <div class="divider"></div>
 
-<!-- ==================== JUNE ==================== -->
 <div class="month-section">
-  <div class="month-title">🗓 2026 年 6 月</div>
+<div class="month-title">🗓 2026 年 6 月</div>
 
-  <!-- Jun 5 - NFP past -->
-  <div class="event-card past">
-    <div class="event-date"><small>6月</small>5</div>
-    <div class="event-info">
-      <div class="event-name">非农 NFP（5月） <span class="badge badge-past">已发布</span></div>
-      <div class="event-detail">实际 17.2万 · 大超预期 · <span class="stars-fill bear">★★★★★</span> 看空 5/5</div>
-    </div>
-  </div>
+<div class="event-card past"><div class="event-date"><small>6月</small>5</div><div class="event-info"><div class="event-name">非农 NFP（5月） <span class="badge badge-past">已发布</span></div><div class="event-detail">实际 17.2万 · <span class="stars-fill bear">★★★★★</span> 看空 5/5</div></div></div>
+<div class="event-card past"><div class="event-date"><small>6月</small>5</div><div class="event-info"><div class="event-name">初请失业金人数 <span class="badge badge-past">已发布</span></div><div class="event-detail">实际 22.5万 · <span class="stars-fill bear">★★★</span> 看空 3/5</div></div></div>
 
-  <!-- Jun 5 - Claims past -->
-  <div class="event-card past">
-    <div class="event-date"><small>6月</small>5</div>
-    <div class="event-info">
-      <div class="event-name">初请失业金人数 <span class="badge badge-past">已发布</span></div>
-      <div class="event-detail">实际 22.5万 · 预期 22.3万 · <span class="stars-fill bear">★★★</span> 看空 3/5</div>
-    </div>
-  </div>
+<div class="event-card"><div class="event-date"><small>6月</small>10</div><div class="event-info">
+<div class="event-name">CPI 消费者物价指数（5月） <span class="badge badge-watch">FOMC前哨</span></div>
+<div class="event-detail">08:30 ET · 同比预期 +3.1% · 前值 +3.0%</div>
+<div class="stars-bar"><span class="stars-label">预期</span><span class="stars-fill bear">★★★★</span><span class="stars-empty">★</span><span class="net-verdict verdict-bear">偏空 4/5</span></div>
+<div class="future-hint">➜ CPI>3.1% → 6/17 FOMC 鹰派铁定 → 纳指第二波杀跌<br>➜ CPI<3.0% → 短暂反弹窗口</div>
+</div></div>
 
-  <!-- Jun 10 - CPI -->
-  <div class="event-card">
-    <div class="event-date"><small>6月</small>10</div>
-    <div class="event-info">
-      <div class="event-name">CPI 消费者物价指数（5月） <span class="badge badge-watch">FOMC前哨</span></div>
-      <div class="event-detail">08:30 ET · 同比预期 +3.1% · 前值 +3.0%</div>
-      <div class="stars-bar">
-        <span class="stars-label">预期</span>
-        <span class="stars-fill bear">★★★★</span><span class="stars-empty">★</span>
-        <span class="net-verdict verdict-bear">偏空 4/5</span>
-      </div>
-      <div class="future-hint">
-        ➜ NFP 之后市场极度敏感 · CPI > 3.1% → 6/17 FOMC 鹰派铁定 → 纳指第二波杀跌<br>
-        ➜ CPI < 3.0% → 短暂反弹窗口 · 但 Fed 点阵图才是真正裁决者
-      </div>
-    </div>
-  </div>
+<div class="event-card"><div class="event-date"><small>6月</small>12</div><div class="event-info">
+<div class="event-name">PPI 生产者物价指数（5月）</div><div class="event-detail">08:30 ET · CPI 的供给侧先行指标</div>
+<div class="stars-bar"><span class="stars-label">预期</span><span class="stars-fill bear">★★★</span><span class="stars-empty">★★</span><span class="net-verdict verdict-bear">偏空 3/5</span></div>
+<div class="future-hint">➜ PPI+CPI 双超 = FOMC 前最后利空子弹</div>
+</div></div>
 
-  <!-- Jun 12 - PPI -->
-  <div class="event-card">
-    <div class="event-date"><small>6月</small>12</div>
-    <div class="event-info">
-      <div class="event-name">PPI 生产者物价指数（5月）</div>
-      <div class="event-detail">08:30 ET · CPI 的供给侧先行指标</div>
-      <div class="stars-bar">
-        <span class="stars-label">预期</span>
-        <span class="stars-fill bear">★★★</span><span class="stars-empty">★★</span>
-        <span class="net-verdict verdict-bear">偏空 3/5</span>
-      </div>
-      <div class="future-hint">
-        ➜ 如果 PPI 也超预期 + CPI 超预期 = 双重输入通胀 → FOMC 前最后利空子弹
-      </div>
-    </div>
-  </div>
+<div class="event-card"><div class="event-date"><small>6月</small>17</div><div class="event-info">
+<div class="event-name">FOMC 利率决议 + 点阵图 + 鲍威尔讲话</div><div class="event-detail">14:00 ET 决议 · 14:30 ET 发布会</div>
+<div class="stars-bar"><span class="stars-label">预期</span><span class="stars-fill bear">★★★★</span><span class="stars-empty">★</span><span class="net-verdict verdict-bear">偏空 4/5</span></div>
+<div class="future-hint">➜ 鲍威尔任何「不排除加息」= 核弹 · 当天仓位<30%</div>
+</div></div>
 
-  <!-- Jun 17 - FOMC -->
-  <div class="event-card">
-    <div class="event-date"><small>6月</small>17</div>
-    <div class="event-info">
-      <div class="event-name">FOMC 利率决议 + 点阵图 + 鲍威尔讲话</div>
-      <div class="event-detail">14:00 ET 决议 · 14:30 ET 发布会</div>
-      <div class="stars-bar">
-        <span class="stars-label">预期</span>
-        <span class="stars-fill bear">★★★★</span><span class="stars-empty">★</span>
-        <span class="net-verdict verdict-bear">偏空 4/5</span>
-      </div>
-      <div class="future-hint">
-        ➜ NFP 后利率市场已定价 12 月加息概率↑ · 点阵图中值若上移 = 年内加息信号<br>
-        ➜ 鲍威尔任何「不排除加息」措辞 = 核弹 · 当天不要让仓位超过 30%
-      </div>
-    </div>
-  </div>
+<div class="event-card"><div class="event-date"><small>6月</small>19</div><div class="event-info"><div class="event-name">初请失业金人数</div><div class="event-detail">08:30 ET · 每周四</div></div></div>
 
-  <!-- Jun 19 - Claims -->
-  <div class="event-card">
-    <div class="event-date"><small>6月</small>19</div>
-    <div class="event-info">
-      <div class="event-name">初请失业金人数</div>
-      <div class="event-detail">08:30 ET · 每周四</div>
-    </div>
-  </div>
+<div class="event-card"><div class="event-date"><small>6月</small>25</div><div class="event-info">
+<div class="event-name">PCE 个人消费支出物价指数（5月）</div><div class="event-detail">08:30 ET · 前值 ~3.8%</div>
+<div class="stars-bar"><span class="stars-label">预期</span><span class="stars-fill bear">★★★★</span><span class="stars-empty">★</span><span class="net-verdict verdict-bear">偏空 4/5</span></div>
+<div class="future-hint">➜ PCE>4% = 滞胀确认 → 加息叙事加速</div>
+</div></div>
 
-  <!-- Jun 25 - PCE -->
-  <div class="event-card">
-    <div class="event-date"><small>6月</small>25</div>
-    <div class="event-info">
-      <div class="event-name">PCE 个人消费支出物价指数（5月）</div>
-      <div class="event-detail">08:30 ET · 美联储最爱通胀指标 · 前值 ~3.8%</div>
-      <div class="stars-bar">
-        <span class="stars-label">预期</span>
-        <span class="stars-fill bear">★★★★</span><span class="stars-empty">★</span>
-        <span class="net-verdict verdict-bear">偏空 4/5</span>
-      </div>
-      <div class="future-hint">
-        ➜ FOMC 后第一份通胀验证 · PCE > 4% = 滞胀确认 → 加息叙事加速
-      </div>
-    </div>
-  </div>
-
-  <!-- Jun 26 - Claims -->
-  <div class="event-card">
-    <div class="event-date"><small>6月</small>26</div>
-    <div class="event-info">
-      <div class="event-name">初请失业金人数</div>
-      <div class="event-detail">08:30 ET · 每周四</div>
-    </div>
-  </div>
+<div class="event-card"><div class="event-date"><small>6月</small>26</div><div class="event-info"><div class="event-name">初请失业金人数</div><div class="event-detail">08:30 ET · 每周四</div></div></div>
 </div>
 
-<!-- ==================== JULY PREVIEW ==================== -->
-<div class="month-section">
-  <div class="month-title">🔭 2026 年 7 月（前瞻）</div>
-
-  <div class="event-card">
-    <div class="event-date"><small>7月</small>2</div>
-    <div class="event-info">
-      <div class="event-name">非农 NFP（6月）</div>
-      <div class="event-detail">08:30 ET · 每月第一个周五</div>
-      <div class="stars-bar">
-        <span class="stars-label">展望</span>
-        <span class="stars-fill bear">★★★★</span><span class="stars-empty">★</span>
-        <span class="net-verdict verdict-bear">偏空 4/5</span>
-      </div>
-      <div class="future-hint">
-        ➜ 如果 6/17 FOMC 鹰派落地 → 7/2 NFP 好 = 加息预期加强 / NFP 差 = 滞胀确认 → 都是利空
-      </div>
-    </div>
-  </div>
-
-  <div class="event-card">
-    <div class="event-date"><small>7月</small>15</div>
-    <div class="event-info">
-      <div class="event-name">CPI 消费者物价指数（6月）</div>
-      <div class="event-detail">08:30 ET</div>
-    </div>
-  </div>
-
-  <div class="event-card">
-    <div class="event-date"><small>7月</small>30</div>
-    <div class="event-info">
-      <div class="event-name">FOMC 利率决议（第 5 次）</div>
-      <div class="event-detail">全年第 5 次 · 如有加息信号=全年最大拐点</div>
-    </div>
-  </div>
+<div class="month-section"><div class="month-title">🔭 2026 年 7 月（前瞻）</div>
+<div class="event-card"><div class="event-date"><small>7月</small>2</div><div class="event-info"><div class="event-name">非农 NFP（6月）</div><div class="event-detail">08:30 ET</div>
+<div class="stars-bar"><span class="stars-label">展望</span><span class="stars-fill bear">★★★★</span><span class="stars-empty">★</span><span class="net-verdict verdict-bear">偏空 4/5</span></div></div></div>
+<div class="event-card"><div class="event-date"><small>7月</small>15</div><div class="event-info"><div class="event-name">CPI 消费者物价指数（6月）</div><div class="event-detail">08:30 ET</div></div></div>
+<div class="event-card"><div class="event-date"><small>7月</small>30</div><div class="event-info"><div class="event-name">FOMC 利率决议（第 5 次）</div><div class="event-detail">如有加息信号=全年最大拐点</div></div></div>
 </div>
 
-<div class=\"note\">
+<div class="note">
   💡 <strong>Roy 操作速查</strong><br><br>
-  ⭐ <strong>5星看空（NFP 6/5）</strong>：仓位 < 30% · 不做多 · SQQQ CALL 日内对冲<br>
-  ⭐ <strong>3-4星看空（CPI/PCE）</strong>：仓位 30-50% · 不追高 · 不做任何隔夜 CALL<br>
-  ⭐ <strong>1-2星</strong>：正常操作<br>
-  ⭐ <strong>看多星</strong>出现时才可加仓做多<br><br>
-  🔴 6 月全月：初请→CPI→PPI→FOMC→PCE = 连续 5 道利空关口 → 保持轻仓<br>
-  🟢 真正的做多窗口在 FOMC 之后（6/17下午 14:30 鲍威尔讲完话）<br><br>
+  ⭐ <strong>5星看空</strong>：仓位<30% · 不做多 · SQQQ CALL 日内对冲<br>
+  ⭐ <strong>3-4星看空</strong>：仓位 30-50% · 不追高 · 不做隔夜 CALL<br>
+  ⭐ <strong>看多星出现</strong>时才可加仓<br><br>
+  🔴 6月全月：连续 5 道利空关口 → 保持轻仓<br>
+  🟢 真正做多窗口：FOMC 之后（6/17 14:30）<br><br>
   ─────────────────<br>
-  <strong>🧬 技术位置修正规则（新增）</strong><br><br>
-  ⚠️ 纯粹的宏观判断忽略了一件事：<strong>价格本身会改变风险</strong>。<br>
-  跌深了 → 利空被定价 → 看空应该减星 · 反弹需求是真实存在的<br>
-  涨猛了 → 乐观被透支 → 看多应该减星 · 回调风险不可忽略<br><br>
-  ┌──────────┬─────────────┬─────────────┬──────────────────┐<br>
-  │ <strong>技术位置</strong>  │ <strong>看空修正</strong>    │ <strong>看多修正</strong>    │ <strong>触发条件</strong>           │<br>
-  ├──────────┼─────────────┼─────────────┼──────────────────┤<br>
-  │ 🟢 超卖  │ <strong>-2 星</strong>      │ <strong>+2 星</strong>      │ RSI＜30 或 VIX＞25   │<br>
-  │          │             │             │ 或 距20日线＜-3%  │<br>
-  │ 🟡 偏弱  │ -1 星       │ +1 星       │ RSI 30-35         │<br>
-  │ 🟡 中性  │ 不变        │ 不变        │ RSI 35-65         │<br>
-  │ 🔴 超买  │ +1 星       │ <strong>-2 星</strong>      │ RSI＞70 或          │<br>
-  │          │             │             │ 距20日线＞+5%    │<br>
-  └──────────┴─────────────┴─────────────┴──────────────────┘<br><br>
-  📍 <strong>今日技术位置：SPY RSI 42 · QQQ RSI 43 · VIX 21.5</strong><br>
-  → 🟡 中性偏弱 · 不在超卖区 → NFP 5星看空 <strong>不变</strong>（技术面未提供对冲力量）<br>
-  → 若下周 SPY 再跌 3% + RSI＜30 + VIX＞25 → 即使 CPI 超预期，看空降为 3-4 星<br>
-  → "该跌的已经跌完了"比任何宏观数据都更能止跌
+  <strong>🧬 技术位置修正规则</strong><br><br>
+  ⚠️ 跌深→利空被定价→看空减星 · 涨猛→乐观被透支→看多减星<br><br>
+  🟢 超卖（RSI＜30/VIX＞25）：看空 <strong>-2星</strong> · 看多 <strong>+2星</strong><br>
+  🟡 偏弱（RSI 30-35）：看空 -1 · 看多 +1<br>
+  🟡 中性（RSI 35-65）：不变<br>
+  🔴 超买（RSI＞70）：看空 +1 · 看多 <strong>-2星</strong><br><br>
+  📍 今日：SPY RSI 42 · QQQ RSI 43 · VIX 21.5<br>
+  → 🟡 中性偏弱 · 未到超卖 → NFP 5星看空不变<br>
+  → 若下周再跌3%+RSI<30+VIX>25 → 看空自动降为3-4星
 </div>
+
+</div><!-- /tab-us -->
+
+<!-- ======== A股 Tab ======== -->
+<div id="tab-cn" class="tab-panel">
+
+<div class="month-section">
+<div class="month-title">🗓 2026 年 6 月</div>
+
+<div class="event-card">
+  <div class="event-date"><small>6月</small>9</div>
+  <div class="event-info">
+    <div class="event-name">CPI / PPI（5月）</div>
+    <div class="event-detail">09:30 北京 · 前值 CPI +0.1% PPI -2.8%</div>
+    <div class="stars-bar"><span class="stars-label">影响</span><span class="stars-fill bear">★★★</span><span class="stars-empty">★★</span><span class="net-verdict verdict-bear">偏空 3/5</span></div>
+    <div class="future-hint">➜ PPI 若继续通缩 → 消费不振 → 小票承压<br>➜ CPI 若抬升 → 政策空间缩小</div>
+  </div>
+</div>
+
+<div class="event-card">
+  <div class="event-date"><small>6月</small>10</div>
+  <div class="event-info">
+    <div class="event-name">社融 & M2（5月） <span class="badge badge-watch">大事件</span></div>
+    <div class="event-detail">盘中不定时 · 前值 社融+1.86万亿 M2 +7.0%</div>
+    <div class="stars-bar"><span class="stars-label">影响</span><span class="stars-fill bear">★★★★</span><span class="stars-empty">★</span><span class="net-verdict verdict-bear">偏空 4/5</span></div>
+    <div class="future-hint">➜ 社融<1万亿 → 信心崩 → 权重+小票双杀<br>➜ 社融超预期 → 短线反弹 · 但弱势不改</div>
+  </div>
+</div>
+
+<div class="event-card">
+  <div class="event-date"><small>6月</small>15</div>
+  <div class="event-info">
+    <div class="event-name">MLF 中期借贷便利操作</div>
+    <div class="event-detail">09:20 北京 · 前值利率 2.50% · 到期 2370亿</div>
+    <div class="stars-bar"><span class="stars-label">影响</span><span class="stars-fill bull">★★</span><span class="stars-empty">★★★</span><span class="net-verdict verdict-bull">偏多 2/5</span></div>
+    <div class="future-hint">➜ MLF 降息 → 重大利好 · 但概率 <30%<br>➜ 平量续作 → 无影响</div>
+  </div>
+</div>
+
+<div class="event-card">
+  <div class="event-date"><small>6月</small>15</div>
+  <div class="event-info">
+    <div class="event-name">规模以上工业增加值 / 社零（5月）</div>
+    <div class="event-detail">10:00 北京 · 前值 工业+5.4% 社零+3.2%</div>
+    <div class="stars-bar"><span class="stars-label">影响</span><span class="stars-fill bear">★★★</span><span class="stars-empty">★★</span><span class="net-verdict verdict-bear">偏空 3/5</span></div>
+    <div class="future-hint">➜ 社零继续疲弱 → 消费股杀 → 你的浙文互联(广告)、珠海冠宇(消费电池)承压</div>
+  </div>
+</div>
+
+<div class="event-card">
+  <div class="event-date"><small>6月</small>16</div>
+  <div class="event-info">
+    <div class="event-name">🇺🇸 FOMC（外围冲击） <span class="badge badge-watch">联动</span></div>
+    <div class="event-detail">次日凌晨 · 若 Fed 鹰派 → 北向资金流出 → A 股低开</div>
+    <div class="stars-bar"><span class="stars-label">影响</span><span class="stars-fill bear">★★★★★</span><span class="net-verdict verdict-bear">看空 5/5</span></div>
+  </div>
+</div>
+
+<div class="event-card">
+  <div class="event-date"><small>6月</small>20</div>
+  <div class="event-info">
+    <div class="event-name">LPR 贷款市场报价利率</div>
+    <div class="event-detail">09:15 北京 · 前值 1Y 3.10% 5Y 3.60%</div>
+    <div class="stars-bar"><span class="stars-label">影响</span><span class="stars-fill bull">★★</span><span class="stars-empty">★★★</span><span class="net-verdict verdict-bull">偏多 2/5</span></div>
+    <div class="future-hint">➜ LPR 降息 → 高开 · 但"五穷六绝"中持续性存疑</div>
+  </div>
+</div>
+
+<div class="event-card">
+  <div class="event-date"><small>6月</small>30</div>
+  <div class="event-info">
+    <div class="event-name">官方 PMI（6月）</div>
+    <div class="event-detail">09:30 北京 · 前值 制造业 50.4 非制造业 51.0</div>
+    <div class="stars-bar"><span class="stars-label">影响</span><span class="stars-fill bear">★★★</span><span class="stars-empty">★★</span><span class="net-verdict verdict-bear">偏空 3/5</span></div>
+    <div class="future-hint">➜ PMI<50 → 衰退信号确认 → 权重破位 · 科创50继续杀</div>
+  </div>
+</div>
+
+</div>
+
+<div class="month-section">
+<div class="month-title">🔭 2026 年 7 月（前瞻）</div>
+
+<div class="event-card">
+  <div class="event-date"><small>7月</small>1</div>
+  <div class="event-info">
+    <div class="event-name">财新 PMI（6月）</div>
+    <div class="event-detail">09:45 北京 · 侧重中小制造企业</div>
+    <div class="future-hint">➜ 财新 PMI 更敏感 → 如果也跌破50 → 你的科创板小票是重灾区</div>
+  </div>
+</div>
+
+<div class="event-card">
+  <div class="event-date"><small>7月</small>15</div>
+  <div class="event-info">
+    <div class="event-name">GDP 二季度数据 + 6月宏观数据包</div>
+    <div class="event-detail">10:00 北京 · 前值 GDP +5.3% · 工业/社零/固投同日发布</div>
+    <div class="stars-bar"><span class="stars-label">影响</span><span class="stars-fill bear">★★★★</span><span class="stars-empty">★</span><span class="net-verdict verdict-bear">偏空 4/5</span></div>
+    <div class="future-hint">➜ 二季度 GDP＜5% → 全年目标承压 → 政策加码预期 vs 现实恶化<br>➜ 这是你A股清仓是否正确的一次验证</div>
+  </div>
+</div>
+
+<div class="event-card">
+  <div class="event-date"><small>7月</small>中旬</div>
+  <div class="event-info">
+    <div class="event-name">政治局会议（三季度经济定调） <span class="badge badge-watch">全年最大</span></div>
+    <div class="event-detail">大概率 7/20 左右 · 定调下半年政策方向</div>
+    <div class="stars-bar"><span class="stars-label">影响</span><span class="stars-fill bull">★★★★</span><span class="stars-empty">★</span><span class="net-verdict verdict-bull">偏多 4/5</span></div>
+    <div class="future-hint">➜ 全年最重要的国内政策事件 · 如果释放强刺激信号 → A股可能反转<br>➜ 如果基调温和 → 继续阴跌</div>
+  </div>
+</div>
+
+<div class="event-card">
+  <div class="event-date"><small>7月</small>20</div>
+  <div class="event-info">
+    <div class="event-name">LPR 贷款市场报价利率</div>
+    <div class="event-detail">09:15 · 政治局会议后如有降息=政策加码信号</div>
+  </div>
+</div>
+
+<div class="event-card">
+  <div class="event-date"><small>7月</small>下旬</div>
+  <div class="event-info">
+    <div class="event-name">中报业绩预告密集披露</div>
+    <div class="event-detail">深市/创业板强制预告截止 7/15 · 业绩雷密集</div>
+    <div class="stars-bar"><span class="stars-label">影响</span><span class="stars-fill bear">★★★★</span><span class="stars-empty">★</span><span class="net-verdict verdict-bear">偏空 4/5</span></div>
+    <div class="future-hint">➜ 你的持仓里：珠海冠宇(消费电池)、卫宁健康(医疗IT)、浙文互联(广告) → 全部是业绩敏感的小票<br>➜ 7月中旬之前不清仓 = 等雷</div>
+  </div>
+</div>
+
+</div>
+
+<div class="note">
+  💡 <strong>Roy A 股操作速查</strong><br><br>
+  6月核心矛盾：<strong>6/10 社融</strong> + <strong>6/9 CPI/PPI</strong> + <strong>6/16 FOMC 外围冲击</strong><br>
+  → 三重利空压顶 · "六绝"不是迷信<br><br>
+  🔴 6月上旬（社融/CPI）：仓位＜30% · 不要抄底<br>
+  🟡 6月中旬（LPR/MLF）：看政策是否发力<br>
+  🟢 7月下旬（政治局会议）：全年最大变盘点<br><br>
+  ⚠️ <strong>Roy 持仓预警：</strong><br>
+  7月中旬中报预告密集披露 → 你的小票（珠海冠宇/卫宁健康/浙文互联/西部超导）全部是业绩暴雷高发区<br>
+  → 7/15 之前清完所有非"唯一稀缺标的"的A股<br>
+  唯一能留的：西部超导（超导材料有一定稀缺性）
+</div>
+
+</div><!-- /tab-cn -->
 
 <div class="refresh">
   🔄 每周一 08:00 自动更新 · Hermes Agent 维护 · 本地 http://192.168.0.127:8888
 </div>
+
+<script>
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+</script>
 
 </body>
 </html>
