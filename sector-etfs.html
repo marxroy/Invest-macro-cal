@@ -16,26 +16,30 @@
   .nav-link.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
   .section-label { font-size: 11px; text-transform: uppercase; color: var(--text2); margin-bottom: 12px; font-weight: 600; }
-
   .month-section { margin-bottom: 22px; }
   .month-title { font-size: 15px; font-weight: 700; padding: 8px 12px; background: var(--card); border-radius: 8px; margin-bottom: 8px; border-left: 3px solid var(--accent); }
   .event-card { background: var(--card); border-radius: 8px; padding: 10px 12px; margin-bottom: 6px; border: 1px solid var(--border); }
   .event-name { font-weight: 600; font-size: 14px; }
   .event-detail { font-size: 11px; color: var(--text2); margin-top: 2px; line-height: 1.6; }
-  .future-hint { font-size: 11px; color: var(--green); margin-top: 3px; }
+
+  .tag { display: inline-block; padding: 1px 7px; border-radius: 8px; font-size: 10px; font-weight: 700; margin-right: 3px; }
+  .tag-options { background: rgba(255,68,68,0.15); color: var(--fire); }
+  .tag-dca { background: rgba(63,185,80,0.15); color: var(--green); }
+  .tag-trade { background: rgba(88,166,255,0.15); color: var(--accent); }
 
   .stars-bar { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 12px; font-weight: 700; }
   .stars-label { font-size: 10px; color: var(--text2); }
   .stars-fill { letter-spacing: 1px; }
   .stars-fill.bear { color: var(--fire); }
   .stars-fill.bull { color: var(--green); }
+  .stars-empty { letter-spacing: 1px; color: var(--border); }
   .net-verdict { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; margin-left: 4px; }
   .verdict-bear { background: rgba(255,68,68,0.15); color: var(--fire); }
   .verdict-bull { background: rgba(63,185,80,0.15); color: var(--green); }
-
+  .future-hint { font-size: 11px; color: var(--green); margin-top: 3px; }
   .note { font-size: 11px; color: var(--text2); padding: 10px; background: var(--card); border-radius: 8px; margin-top: 8px; }
   .etf-table { width: 100%; font-size: 10px; border-collapse: collapse; margin-top: 8px; }
-  .etf-table td, .etf-table th { padding: 5px 6px; text-align: left; border-bottom: 1px solid var(--border); }
+  .etf-table td, .etf-table th { padding: 6px 6px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
   .etf-table th { color: var(--text2); font-weight: 500; }
   .refresh { text-align: center; font-size: 10px; color: var(--text2); margin-top: 20px; padding-bottom: 20px; }
 </style>
@@ -44,174 +48,231 @@
 
 <div class="nav-bar">
   <span style="color:var(--accent);font-weight:700;margin-right:8px;">📊 宏观日历</span>
-  <a href="index.html" class="nav-link">🇺🇸 美股</a>
+  <a href="index.html" class="nav-link">🇺🇸美股</a>
   <a href="index.html#tab-cn" class="nav-link">🇨🇳 A股</a>
-  <a href="precious-metals.html" class="nav-link">🥇 贵金属</a>
+  <a href="precious-metals.html" class="nav-link">🥇贵金属</a>
   <a href="crypto.html" class="nav-link">₿ 加密</a>
-  <a href="dividends.html" class="nav-link">💰 高股息</a>
-  <a href="sector-etfs.html" class="nav-link active">🎯 行业ETF</a>
+  <a href="dividends.html" class="nav-link">💰高股息</a>
+  <a href="sector-etfs.html" class="nav-link active">🎯行业ETF</a>
 </div>
 
 <h1>🎯 高景气行业 ETF</h1>
-<p class="subtitle">上限 6 只 · 高波动 · 高弹性 · 定投友好 · 更新于 2026-06-06</p>
+<p class="subtitle">10 只精选 · 三种玩法标注：📈CALL / 💵定投 / 🔄交易 · 更新于 2026-06-06</p>
 
-<div class="section-label">🏆 Roy 精选 6 只</div>
+<div class="section-label">🏷 标签说明</div>
+<div style="display:flex;gap:12px;margin-bottom:14px;font-size:11px;flex-wrap:wrap">
+  <span><span class="tag tag-options">📈 CALL</span> 期权流动性好 → 适合开 CALL 放大收益</span>
+  <span><span class="tag tag-dca">💵 定投</span> 长期向上 → 每月定额买，不择时</span>
+  <span><span class="tag tag-trade">🔄 交易</span> 波动大但标的不适合期权 → 直接买卖正股</span>
+</div>
+
+<div class="section-label">🏆 Roy 精选 10 只</div>
 
 <table class="etf-table">
-<tr><th>#</th><th>代码</th><th>名称</th><th>赛道</th><th>β</th><th>期权</th><th>定投?</th></tr>
+<tr><th>#</th><th>代码</th><th>赛道</th><th>β</th><th>📈CALL</th><th>💵定投</th><th>🔄交易</th><th>仓位</th></tr>
 <tr>
-  <td>1</td><td><strong>SMH</strong></td><td>VanEck 半导体</td><td>芯片全链</td><td>1.6x</td><td>✅ 流动性好</td><td>✅ 首选</td>
+  <td>1</td><td><strong>SMH</strong></td><td>芯片全链 · 含 MU</td><td>1.6x</td><td>✅ 首选</td><td>✅</td><td>—</td><td>20%</td>
 </tr>
 <tr>
-  <td>2</td><td><strong>SOXX</strong></td><td>iShares 半导体</td><td>芯片（均衡）</td><td>1.4x</td><td>✅</td><td>✅ 更稳</td>
+  <td>2</td><td><strong>SOXX</strong></td><td>芯片均衡 · 30只等权</td><td>1.4x</td><td>✅</td><td>✅</td><td>—</td><td>12%</td>
 </tr>
 <tr>
-  <td>3</td><td><strong>BOTZ</strong></td><td>Global X 机器人&amp;AI</td><td>机器人+AI 应用</td><td>1.5x</td><td>✅</td><td>✅</td>
+  <td>3</td><td><strong>BOTZ</strong></td><td>机器人+AI 应用</td><td>1.5x</td><td>✅</td><td>✅</td><td>—</td><td>15%</td>
 </tr>
 <tr>
-  <td>4</td><td><strong>URA</strong></td><td>Global X 铀矿</td><td>核能/铀矿</td><td>2.0x</td><td>✅</td><td>⚠️ 高波</td>
+  <td>4</td><td><strong>IGV</strong></td><td>软件/SaaS</td><td>1.3x</td><td>✅</td><td>✅</td><td>—</td><td>10%</td>
 </tr>
 <tr>
-  <td>5</td><td><strong>XBI</strong></td><td>SPDR 生物科技</td><td>生物科技（等权）</td><td>1.8x</td><td>✅</td><td>✅</td>
+  <td>5</td><td><strong>CIBR</strong></td><td>网络安全</td><td>1.1x</td><td>✅ 价差中等</td><td>✅</td><td>—</td><td>8%</td>
 </tr>
 <tr>
-  <td>6</td><td><strong>ARKK</strong></td><td>ARK 颠覆性创新</td><td>0→1 创新</td><td>2.2x</td><td>✅ 但价差宽</td><td>⚠️ 波动极大</td>
+  <td>6</td><td><strong>XBI</strong></td><td>生物科技 · 等权</td><td>1.8x</td><td>❌ 等FOMC后</td><td>✅</td><td>—</td><td>10%</td>
+</tr>
+<tr>
+  <td>7</td><td><strong>URA</strong></td><td>铀矿/核能</td><td>2.0x</td><td>❌ 价差太宽</td><td>—</td><td>✅</td><td>10%</td>
+</tr>
+<tr>
+  <td>8</td><td><strong>TAN</strong></td><td>太阳能/光伏</td><td>1.8x</td><td>❌</td><td>—</td><td>✅</td><td>5%</td>
+</tr>
+<tr>
+  <td>9</td><td><strong>LIT</strong></td><td>锂电池/锂矿</td><td>1.6x</td><td>❌</td><td>—</td><td>✅</td><td>5%</td>
+</tr>
+<tr>
+  <td>10</td><td><strong>ARKK</strong></td><td>0→1 颠覆创新</td><td>2.2x</td><td>❌</td><td>✅ 小额</td><td>—</td><td>5%</td>
 </tr>
 </table>
 
-<!-- ===== Each ETF detail ===== -->
-<div class="month-section">
-<div class="month-title">① SMH · 半导体全链（🥇 首选）</div>
-<div class="event-card"><div class="event-info">
-<div class="event-name">为什么选它</div>
-<div class="event-detail">
-  持仓：NVDA + TSM + ASML + AMD + AVGO + MU（你的 MU 就在里面）<br>
-  逻辑：AI 硬件需求 > 软件 · 芯片是全球最重要的基础设施<br>
-  波动：日波幅 2-3% · 比 QQQ 快 2 倍 · 适合 Roy 的激进风格
+<!-- ===== DRAM note ===== -->
+<div class="note" style="margin-top:8px">
+  💡 <strong>关于 DRAM —— 为什么没有单独的 DRAM ETF</strong><br>
+  全球 DRAM 市场被三星、SK 海力士、美光（MU）三家垄断 95%。任何半导体 ETF 里 MU 都是重仓。<br>
+  <strong>SMH</strong> 含 MU（~5%）+ NVDA + TSM + ASML → 一条链全覆盖。<br>
+  你已经在 <strong>MU $850 CALL（6/18）</strong> 上押了重注 → 再加 DRAM ETF 是重复暴露同一风险。<br>
+  与其找不存在的 DRAM ETF，不如用 <strong>SMH CALL</strong> 替代——底层有 MU 有 NVDA，既能吃到你自己的 MU 方向，又分散了单票归零风险。
 </div>
-<div class="stars-bar"><span class="stars-label">推荐</span><span class="stars-fill bull">★★★★★</span><span class="net-verdict verdict-bull">强烈推荐 5/5</span></div>
+
+<!-- ===== Detail cards ===== -->
+<div class="month-section">
+<div class="month-title">① SMH · 半导体全链（🥇首选 · 含你的 MU）<span class="tag tag-options">📈 CALL</span><span class="tag tag-dca">💵 定投</span></div>
+<div class="event-card"><div class="event-info">
+<div class="event-name">为什么排第一</div>
+<div class="event-detail">
+  持仓：NVDA + TSM + ASML + AMD + AVGO + <strong>MU</strong> + QCOM<br>
+  你已经在 MU $850 CALL 上 → SMH 是它的大盘分散版。同样的半导体方向，波动降 30%，归零风险降 80%
+</div>
+<div class="stars-bar"><span class="stars-label">推荐</span><span class="stars-fill bull">★★★★★</span><span class="net-verdict verdict-bull">强烈推荐</span></div>
 </div></div>
 <div class="event-card"><div class="event-info">
-<div class="event-name">🎯 交易策略</div>
+<div class="event-name">🎯 📈 CALL 策略</div>
 <div class="event-detail">
-  <strong>✅ 策略①：定投</strong> → 每月第一个周一买 $500 SMH<br>
-  <strong>✅ 策略②：回调加仓</strong> → SMH 从高点跌 15%→ 双倍定投 · 25%→ 三倍<br>
-  <strong>✅ 策略③：SMH CALL</strong> → 6个月远期 CALL（OTM 5%），$220→$240 CALL<br>
-  💡 为什么 SMH > SOXX：SMH 更重仓 NVDA/TSM，beta 更高，适合你要的弹性<br>
-  ⚠️ 不碰 SOXL（3x）的期权：3x 半导体 ETF 的期权价差是你本金的 5-10%
+  买 <strong>SMH 6个月远期 CALL（OTM 5%）</strong> · $220→$240 CALL · 每季度滚动一次<br>
+  ⚠️ <strong>不碰 SOXL 的 CALL：</strong>3x 半导体 ETF 的 CALL 价差 5-10%，给做市商送钱<br>
+</div>
+</div></div>
+<div class="event-card"><div class="event-info">
+<div class="event-name">🎯 💵 定投策略</div>
+<div class="event-detail">
+  每月第一个周一买 $500 · 从高点跌 15%→双倍 · 25%→三倍
 </div>
 </div></div>
 </div>
 
 <div class="month-section">
-<div class="month-title">② SOXX · 半导体（稳版）</div>
+<div class="month-title">② SOXX · 芯片均衡版<span class="tag tag-options">📈 CALL</span><span class="tag tag-dca">💵 定投</span></div>
 <div class="event-card"><div class="event-info">
-<div class="event-name">为什么选它</div>
+<div class="event-name">SMH vs SOXX</div>
 <div class="event-detail">
-  如果觉得 SMH 太集中 NVDA → 用 SOXX 替代。更均衡（30只等权重倾斜）。<br>
-  波动略低但期权流动性极好 → 更适合开 CALL
+  SMH 重仓 NVDA/TSM（集中·弹性大一倍）· SOXX 30只等权（分散·更稳）<br>
+  → 如果觉得 SMH 太偏 NVDA → 用 SOXX 替代 · 期权流动性一样好<br>
+  → 不要同时持有两个：选一个。持仓重叠 70%
 </div>
-<div class="stars-bar"><span class="stars-label">推荐</span><span class="stars-fill bull">★★★★</span><span class="stars-empty">★</span><span class="net-verdict verdict-bull">推荐 4/5</span></div>
 </div></div>
 </div>
 
 <div class="month-section">
-<div class="month-title">③ BOTZ · 机器人 & AI 应用（Roy 最对味）</div>
+<div class="month-title">③ BOTZ · 机器人+AI 应用<span class="tag tag-options">📈 CALL</span><span class="tag tag-dca">💵 定投</span></div>
 <div class="event-card"><div class="event-info">
-<div class="event-name">为什么选它</div>
+<div class="event-name">为什么是 Roy 最对的 ETF</div>
 <div class="event-detail">
   持仓：Intuitive Surgical + NVDA + Keyence + ABB + Fanuc<br>
-  逻辑：你不是在炒 AI 模型，是在炒「AI 造出来的物理世界」——机器人、手术、自动化<br>
-  → 跟你的 0→1 投资哲学完全一致<br>
-  📊 但注意：BOTZ 持仓里有 NVDA，跟 SMH 重叠 → 选一个就好，不要两个都买
+  AI 不是模型——是手术机器人、工厂自动化、自动驾驶。这是物理世界里 AI 的出口<br>
+  ⚠️ 含 NVDA → 跟 SMH 重叠。二选一
 </div>
-<div class="stars-bar"><span class="stars-label">推荐</span><span class="stars-fill bull">★★★★★</span><span class="net-verdict verdict-bull">强烈推荐 5/5</span></div>
 </div></div>
 </div>
 
 <div class="month-section">
-<div class="month-title">④ URA · 铀矿/核能（卖铲子的终极形态）</div>
+<div class="month-title">④ IGV · 软件/SaaS<span class="tag tag-options">📈 CALL</span><span class="tag tag-dca">💵 定投</span></div>
 <div class="event-card"><div class="event-info">
-<div class="event-name">为什么选它</div>
+<div class="event-name">芯片的上游——软件</div>
+<div class="event-detail">
+  持仓：MSFT + ADBE + CRM + NOW + ORCL + INTU<br>
+  你的 MU 是硬件，IGV 是软件——两者互补。AI 的两个出口：算力（SMH）+ 应用（IGV）<br>
+  β 1.3x，比 SMH 稳，但长期复合增长同样可观
+</div>
+</div></div>
+</div>
+
+<div class="month-section">
+<div class="month-title">⑤ CIBR · 网络安全<span class="tag tag-options">📈 CALL</span><span class="tag tag-dca">💵 定投</span></div>
+<div class="event-card"><div class="event-info">
+<div class="event-name">AI 越强，安全越值钱</div>
+<div class="event-detail">
+  持仓：CRWD + PANW + FTNT + ZS + OKTA<br>
+  逻辑：AI 让攻击更智能 → 防御必须更智能 → 安全支出是最后一笔被砍的预算<br>
+  β 1.1x（所有 ETF 里最稳），适合做组合里的防守层
+</div>
+</div></div>
+</div>
+
+<div class="month-section">
+<div class="month-title">⑥ XBI · 生物科技<span class="tag tag-dca">💵 定投</span></div>
+<div class="event-card"><div class="event-info">
+<div class="event-name">已经被杀两年，利率松动即反弹最快</div>
+<div class="event-detail">
+  ⚠️ <strong>CALL 暂不适合：</strong>小票期权价差 10-20%<br>
+  → 等 6/17 FOMC 后如果鲍威尔偏鸽 → 再开 3个月 CALL<br>
+  当前策略：<strong>每月 $300 定投 · 不择时</strong>
+</div>
+</div></div>
+</div>
+
+<div class="month-section">
+<div class="month-title">⑦ URA · 铀矿/核能<span class="tag tag-trade">🔄 交易</span></div>
+<div class="event-card"><div class="event-info">
+<div class="event-name">AI 数据中心的终极铲子</div>
 <div class="event-detail">
   持仓：Cameco + Kazatomprom + SMR 公司<br>
-  逻辑：AI 数据中心需要核电 → 铀矿就是给 AI 卖铲子的铲子<br>
-  ⚡ 波动极大（日波幅 3-5%），但跟纳指不相关 → 是真正的分散<br>
-  📊 2025-2026 铀价翻倍 → 但 ETF 已经从高点腰斩 → 现在在深度回调中
-</div>
-<div class="stars-bar"><span class="stars-label">推荐</span><span class="stars-fill bull">★★★</span><span class="stars-empty">★★</span><span class="net-verdict verdict-bull">适合 3/5</span></div>
-</div></div>
-<div class="event-card"><div class="event-info">
-<div class="event-name">🎯 交易策略（波动极大→必须分批）</div>
-<div class="event-detail">
-  <strong>✅ 策略：分批建仓，不追高不吃全鱼</strong><br>
-  ① URA 从高点跌超 30% → 第一批 2%（现在就在这）<br>
-  ② URA 从高点跌超 45% → 第二批 3%<br>
-  ③ 不设止盈 · 拿到核电叙事被主流接受 · 可能 2-3 年周期<br>
-  ⚠️ <strong>不碰 URA 的期权：</strong>价差太宽+IV 太高=做市商的提款机
+  AI 数据中心 = 吃电怪兽 → 核电是唯一解 → 铀矿是铲子的铲子<br>
+  ⚠️ <strong>不适合期权 · 也不适合定投：</strong>铀矿周期极长（5-10年），暴涨暴跌<br>
+  → 策略：分三批建仓。高点跌 30%→2%、45%→3%、60%→5%。不设止盈，拿 2-3 年
 </div>
 </div></div>
 </div>
 
 <div class="month-section">
-<div class="month-title">⑤ XBI · 生物科技（抄底的学问）</div>
+<div class="month-title">⑧ TAN · 太阳能/光伏<span class="tag tag-trade">🔄 交易</span></div>
 <div class="event-card"><div class="event-info">
-<div class="event-name">为什么选它</div>
+<div class="event-name">被低估的能源转型</div>
 <div class="event-detail">
-  等权 ETF（每只 ~1%）→ 不会因为一只药 FDA 否决就崩<br>
-  逻辑：生物科技已经被杀了两年 · 利率只要松动→ XBI 是反弹最快的板块<br>
-  📊 当前距高点 -40%+ · 在历史底部区域
-</div>
-<div class="stars-bar"><span class="stars-label">推荐</span><span class="stars-fill bull">★★★★</span><span class="stars-empty">★</span><span class="net-verdict verdict-bull">推荐 4/5</span></div>
-</div></div>
-<div class="event-card"><div class="event-info">
-<div class="event-name">🎯 交易策略（逆势定投）</div>
-<div class="event-detail">
-  <strong>✅ 策略：每月定投 $300 · 不择时 · 定期定额</strong><br>
-  逻辑：XBI 在底部区间，定投比一次性建仓更安全<br>
-  不碰期权：XBI 的小票期权价差 10-20%→ 不是你在玩<br>
-  💡 如果真的想开 CALL → 等 FOMC 明确鸽派后再买 3个月 CALL
+  持仓：ENPH + FSLR + SEDG + RUN<br>
+  光伏被利率摁了两年 → 只要 Fed 转向降息 → 光伏是反弹最凶的可再生能源<br>
+  ⚠️ 期权流动性差 + 波动极大 → <strong>只做波段交易</strong> · 总仓 <5%
 </div>
 </div></div>
 </div>
 
 <div class="month-section">
-<div class="month-title">⑥ ARKK · 颠覆性创新（Roy 的 VC 指数）</div>
+<div class="month-title">⑨ LIT · 锂电池/锂矿<span class="tag tag-trade">🔄 交易</span></div>
 <div class="event-card"><div class="event-info">
-<div class="event-name">为什么选它</div>
+<div class="event-name">赣锋锂业的美股映射</div>
+<div class="event-detail">
+  持仓：ALB + SQM + 赣锋 + 宁德时代 + 比亚迪<br>
+  你 A 股有赣锋锂业 → LIT 是它的大盘分散版。锂价跌了两年，现在在全市场弃儿位置<br>
+  ⚠️ 期权几乎不存在 → <strong>只买正股做波段</strong> · 等锂价见底信号再进
+</div>
+</div></div>
+</div>
+
+<div class="month-section">
+<div class="month-title">⑩ ARKK · 颠覆性创新<span class="tag tag-dca">💵 定投</span></div>
+<div class="event-card"><div class="event-info">
+<div class="event-name">VC 视角的 ETF</div>
 <div class="event-detail">
   持仓：TSLA + ROKU + ZM + SQ + CRSP + PATH<br>
-  逻辑：这是 VC 化的 ETF——押注 0→1 的公司。跟你的阿宝原则 34 完全一致<br>
-  ⚡ 但是：ARKK 波动是自己神经病的级别（β=2.2）<br>
-  ⚡ 木头姐上个月刚被全网骂完 → 阿宝原则 16「在没人喜欢的时候买进」
-</div>
-<div class="stars-bar"><span class="stars-label">推荐</span><span class="stars-fill bull">★★</span><span class="stars-empty">★★★</span><span class="net-verdict verdict-bull">适度 2/5</span></div>
-</div></div>
-<div class="event-card"><div class="event-info">
-<div class="event-name">🎯 交易策略</div>
-<div class="event-detail">
-  <strong>✅ 策略：小额定投（$200/月）· 当 VC 在投 · 不当主力仓位</strong><br>
-  💡 总配置 <10% · 你已经在 ASTS（0→1 卫星）+ MU（AI 硬件）上有大量暴露 → ARKK 是第三层 0→1 叠加
+  阿宝原则 16 + 34：0→1 公司 + 在没人喜欢时买进<br>
+  → <strong>小额定投（$200/月）· 当成 VC · 不设止盈</strong>
 </div>
 </div></div>
 </div>
 
-<div class="note">
-  💡 <strong>⚡ Roy 6只 ETF 量化速查</strong><br><br>
-  ┌────────┬──────────┬──────────┬──────────────┬──────────┐<br>
-  │ <strong>ETF</strong>    │ <strong>推荐度</strong>   │ <strong>操作</strong>      │ <strong>期权？</strong>       │ <strong>仓位上限</strong>  │<br>
-  ├────────┼──────────┼──────────┼──────────────┼──────────┤<br>
-  │ SMH     │ ⭐⭐⭐⭐⭐  │ 定投+回调加 │ ✅ 6月CALL    │ 20%      │<br>
-  │ SOXX    │ ⭐⭐⭐⭐   │ 替代SMH      │ ✅ 6月CALL    │ 15%      │<br>
-  │ BOTZ    │ ⭐⭐⭐⭐⭐  │ 定投         │ ✅ 3月CALL    │ 15%      │<br>
-  │ URA     │ ⭐⭐⭐    │ 分批建仓     │ ❌ 不碰       │ 10%      │<br>
-  │ XBI     │ ⭐⭐⭐⭐   │ 定投         │ ❌ 等FOMC后   │ 10%      │<br>
-  │ ARKK    │ ⭐⭐     │ 小额定投     │ ❌ 不碰       │ 8%       │<br>
-  └────────┴──────────┴──────────┴──────────────┴──────────┘<br><br>
-  💡 <strong>为什么 ETF > 个股：</strong><br>
-  你现在的 ASTS / MU 都是单票 CALL → 最大风险是单只票暴雷<br>
-  ETF 把风险分散到 30-100 只股票 → 同样的 CALL 策略，波动小 30% 但归零风险小 80%<br>
-  → 激进玩法（单票 CALL）保留 50% 仓位 + 稳健玩法（ETF CALL/定投）占 50%
+<!-- ===== Summary table ===== -->
+<div class="month-section">
+<div class="month-title">📐 Roy 快速决策矩阵</div>
+</div>
+
+<table class="etf-table">
+<tr><th>你想…</th><th>上哪个</th><th>怎么玩</th></tr>
+<tr><td>放大半导体利润</td><td><strong>SMH CALL · 6月</strong></td><td>OTM 5%，每季滚动，<20%仓位</td></tr>
+<tr><td>分散 MU 风险</td><td><strong>SMH 定投</strong></td><td>每月 $500，跟 MU CALL 互补</td></tr>
+<tr><td>押 AI 软件端</td><td><strong>IGV CALL · 3月</strong></td><td>OTM 5%，<10%仓位</td></tr>
+<tr><td>防守+AI 保险</td><td><strong>CIBR 定投</strong></td><td>每月 $300，最稳的科技 ETF</td></tr>
+<tr><td>赌滞胀+核能</td><td><strong>URA 正股</strong></td><td>分三批建仓，2-3年周期</td></tr>
+<tr><td>赌利率转向</td><td><strong>XBI 定投 → 等 FOMC 后开 CALL</strong></td><td>现在定投，鸽派后转 CALL</td></tr>
+<tr><td>能源转型抄底</td><td><strong>TAN 正股</strong></td><td>波段，<5%，不长期</td></tr>
+<tr><td>锂价见底博弈</td><td><strong>LIT 正股</strong></td><td>等信号，<5%，波段</td></tr>
+<tr><td>0→1 VC 心态</td><td><strong>ARKK 定投</strong></td><td>$200/月，不关心价格</td></tr>
+</table>
+
+<div class="note" style="margin-top:12px">
+  💡 <strong>三个为什么</strong><br><br>
+  <strong>为什么 SMH CALL > SOXX CALL？</strong><br>
+  SMH 更重仓 NVDA/TSM → β 高 20% → CALL 的收益更大。你要的是弹性，不是均衡。<br><br>
+  <strong>为什么 URA/TAN/LIT 只能交易不能定投？</strong><br>
+  定投的前提是标的长期向上。铀矿和锂矿是周期品，10 年可能横盘。CALL 也不行（价差太宽）。<br>
+  唯一适合的玩法：跌深了分批买 → 拿 2-3 年 → 卖。中间不管。<br><br>
+  <strong>为什么 XBI 现在不能开 CALL？</strong><br>
+  生物科技小票的期权价差 10-20% → 买进去就亏 10-20%。等 FOMC 明确鸽派 → 流动性回归 → 再开 CALL。
 </div>
 
 <div class="refresh">🔄 每周一自动更新 · Hermes Agent 维护</div>
