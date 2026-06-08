@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>₿ 加密货币追踪</title>
+<style>
+  :root {
+    --bg: #0f1117; --card: #1a1d2e; --border: #2a2d3e;
+    --text: #e1e4e8; --text2: #8b949e;
+    --red: #ff6b6b; --green: #3fb950; --yellow: #d2991d;
+    --accent: #58a6ff; --fire: #ff4444; --gold: #f0b90b; --btc: #f7931a;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); padding: 16px; max-width: 600px; margin: 0 auto; line-height: 1.5; }
+  h1 { font-size: 20px; margin-bottom: 2px; }
+  .subtitle { color: var(--text2); font-size: 12px; margin-bottom: 12px; }
+
+  .nav-bar { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+  .nav-link { padding: 6px 14px; border-radius: 16px; font-size: 12px; font-weight: 600; text-decoration: none; background: var(--card); color: var(--text2); border: 1px solid var(--border); }
+  .nav-link.active { background: var(--btc); color: #fff; border-color: var(--btc); }
+
+  .section-label { font-size: 11px; text-transform: uppercase; color: var(--text2); margin-bottom: 12px; font-weight: 600; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+  .price-card { background: var(--card); border-radius: 8px; padding: 12px; border: 1px solid var(--border); }
+  .price-card .sym { font-size: 11px; color: var(--text2); margin-bottom: 2px; }
+  .price-card .price { font-size: 22px; font-weight: 800; }
+  .price-card .chg { font-size: 13px; margin-top: 2px; }
+  .chg-up { color: var(--green); } .chg-down { color: var(--red); }
+
+  .month-section { margin-bottom: 22px; }
+  .month-title { font-size: 15px; font-weight: 700; padding: 8px 12px; background: var(--card); border-radius: 8px; margin-bottom: 8px; border-left: 3px solid var(--btc); }
+  .event-card { background: var(--card); border-radius: 8px; padding: 10px 12px; margin-bottom: 6px; border: 1px solid var(--border); }
+  .event-name { font-weight: 600; font-size: 14px; }
+  .event-detail { font-size: 11px; color: var(--text2); margin-top: 2px; }
+  .future-hint { font-size: 11px; color: var(--green); margin-top: 3px; }
+
+  .stars-bar { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 12px; font-weight: 700; }
+  .stars-label { font-size: 10px; color: var(--text2); }
+  .stars-fill { letter-spacing: 1px; }
+  .stars-fill.bear { color: var(--fire); }
+  .stars-fill.bull { color: var(--green); }
+  .net-verdict { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; margin-left: 4px; }
+  .verdict-bear { background: rgba(255,68,68,0.15); color: var(--fire); }
+  .verdict-bull { background: rgba(63,185,80,0.15); color: var(--green); }
+
+  .note { font-size: 11px; color: var(--text2); padding: 10px; background: var(--card); border-radius: 8px; margin-top: 8px; }
+  .etf-table { width: 100%; font-size: 10px; border-collapse: collapse; margin-top: 8px; }
+  .etf-table td, .etf-table th { padding: 4px 6px; text-align: left; border-bottom: 1px solid var(--border); }
+  .etf-table th { color: var(--text2); font-weight: 500; }
+  .refresh { text-align: center; font-size: 10px; color: var(--text2); margin-top: 20px; padding-bottom: 20px; }
+</style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <span style="color:var(--btc);font-weight:700;margin-right:8px;">📊 宏观日历</span>
+  <a href="index.html" class="nav-link">🇺🇸 美股</a>
+  <a href="index.html#tab-cn" class="nav-link">🇨🇳 A股</a>
+  <a href="precious-metals.html" class="nav-link">🥇 贵金属</a>
+  <a href="crypto.html" class="nav-link active">₿ 加密</a>
+</div>
+
+<h1>₿ 加密货币追踪</h1>
+<p class="subtitle">更新于 2026-06-06 · BTC $63,898 | ETH $1,698 · 每周一自动刷新</p>
+
+<div class="section-label">₿ 实时价格</div>
+<div class="grid">
+  <div class="price-card"><div class="sym">BTC 比特币</div><div class="price">$63,898</div><div class="chg chg-down">-7.0% · 与纳指同步暴跌</div></div>
+  <div class="price-card"><div class="sym">ETH 以太坊</div><div class="price">$1,698</div><div class="chg chg-down">-8.2% · 跟 BTC</div></div>
+</div>
+
+<div class="section-label">🔥 加密相关个股</div>
+<div class="grid">
+  <div class="price-card"><div class="sym">MSTR · MicroStrategy</div><div class="price">$245</div><div class="chg chg-down">Saylor 持 50万+ BTC</div></div>
+  <div class="price-card"><div class="sym">COIN · Coinbase</div><div class="price">$152</div><div class="chg chg-down">交易所龙头</div></div>
+  <div class="price-card"><div class="sym">MARA · Marathon</div><div class="price">$14.80</div><div class="chg chg-down">最大矿企</div></div>
+  <div class="price-card"><div class="sym">RIOT · Riot</div><div class="price">$9.32</div><div class="chg chg-down">矿企 #2</div></div>
+  <div class="price-card"><div class="sym">CLSK · CleanSpark</div><div class="price">$7.45</div><div class="chg chg-down">矿企 #3</div></div>
+  <div class="price-card"><div class="sym">HUT · Hut 8</div><div class="price">$18.20</div><div class="chg chg-down">北美矿企</div></div>
+</div>
+
+<!-- Short-term: 3 months -->
+<div class="month-section">
+<div class="month-title">🔴 短期（3 个月滚动）— 战术层</div>
+
+<div class="event-card">
+<div class="event-name">BTC · 被纳指拖下水</div>
+<div class="event-detail">3月高 $101K → 当前 $63.9K（-37%）| RSI 28 | 已入超卖区</div>
+<div class="stars-bar"><span class="stars-label">看空</span><span class="stars-fill bear">★★★</span><span class="net-verdict verdict-bear">偏空 3/5</span></div>
+<div class="future-hint">
+  ➜ RSI 28 = 技术上超卖 → 反弹随时可能（2月内概率 >60%）<br>
+  ➜ 但跟纳指同步暴跌说明：BTC 还是风险资产，不是数字黄金<br>
+  ➜ $58K 是下一个支撑位（2025 Q4 密集成交区）<br>
+  ➜ <strong>⛏ 减半后 18 个月模型（4/24减半）：正常应在 2025 Q4-2026 Q2 见到本周期顶峰</strong><br>
+  ➜ 当前距减半已 14 个月，价格反而在高位暴跌 → 周期可能已被宏观打断
+</div>
+</div>
+
+<div class="event-card">
+<div class="event-name">ETH · 更惨</div>
+<div class="event-detail">3月高 $2,950 → 当前 $1,698（-42%）| RSI 24 | 极度超卖</div>
+<div class="stars-bar"><span class="stars-label">看空</span><span class="stars-fill bear">★★</span><span class="net-verdict verdict-bear">看空 2/5（技术超卖减星）</span></div>
+<div class="future-hint">
+  ➜ $1,500 是结构性底部（2023-2024 支撑位）<br>
+  ➜ 链上 Gas 费极低 + 质押率稳定 = 没人在用但也没人在跑<br>
+  ➜ 反弹条件：BTC 先稳 + 纳指不再跌
+</div>
+</div>
+
+<div class="event-card">
+<div class="event-name">MSTR · 比特币的杠杆股票</div>
+<div class="event-detail">持有 50万+ BTC · NAV 溢价已从 +60% 压缩到 +20%</div>
+<div class="stars-bar"><span class="stars-label">看空</span><span class="stars-fill bear">★★★</span><span class="net-verdict verdict-bear">偏空 3/5</span></div>
+<div class="future-hint">
+  ➜ MSTR 是 BTC 的 1.5x 杠杆 · BTC 跌 7% = MSTR 跌 10%<br>
+  ➜ 溢价压缩=市场不再为"BTC 持仓公司"付额外价钱 → 看跌
+</div>
+</div>
+
+<div class="event-card">
+<div class="event-name">COIN · 交易量下滑</div>
+<div class="event-detail">BTC 跌 + US 监管不确定 = 散户交易量萎缩</div>
+<div class="stars-bar"><span class="stars-label">看空</span><span class="stars-fill bear">★★★★</span><span class="net-verdict verdict-bear">看空 4/5</span></div>
+<div class="future-hint">➜ 交易所是最顺周期的加密标的 · BTC 不涨 COIN 不涨 · 简单直接</div>
+</div>
+</div>
+
+<!-- Mid-term: 1 year -->
+<div class="month-section">
+<div class="month-title">🟡 中期（1 年周期）— 周期层</div>
+
+<div class="event-card">
+<div class="event-name">BTC · ETF 资金流是关键</div>
+<div class="event-detail">现货 BTC ETF（IBIT/FBTC/GBTC）管理资产 $120B+ · 机构化进程不可逆</div>
+<div class="stars-bar"><span class="stars-label">看多</span><span class="stars-fill bull">★★★</span><span class="net-verdict verdict-bull">偏多 3/5</span></div>
+<div class="future-hint">
+  ➜ 12 个月内如果 ETF 资金恢复流入 → BTC 重返 $80-100K<br>
+  ➜ 如果 6/17 FOMC 鹰派 → 流动性抽干 → $50-60K 区间震荡半年<br>
+  ➜ ⛏ <strong>减半效应仍在：</strong>比特币历史上减半后 12-18 个月见顶。4/24 减半 → 应在 2025 Q4-2026 Q2 见顶。<br>
+  当前距减半已 14 个月 → 要么顶已过（$109K），要么还有最后一波
+</div>
+</div>
+
+<div class="event-card">
+<div class="event-name">ETH · 质押 ETF 获批是最大催化剂</div>
+<div class="event-detail">若 ETH 质押 ETF 获批 → 4-6% 年化无风险收益 → 机构抢筹</div>
+<div class="stars-bar"><span class="stars-label">看多</span><span class="stars-fill bull">★★★</span><span class="net-verdict verdict-bull">偏多 3/5（等催化剂）</span></div>
+<div class="future-hint">➜ ETH 最缺的不是技术是叙事 · 质押 ETF 就是那个叙事</div>
+</div>
+</div>
+
+<!-- Long-term: 3 years -->
+<div class="month-section">
+<div class="month-title">🟢 远期（3 年）— 结构性层</div>
+
+<div class="event-card">
+<div class="event-name">BTC · 数字黄金叙事</div>
+<div class="event-detail">供应上限 2100 万 · 全球 M2 持续扩张 · 年轻人首选价值储存</div>
+<div class="stars-bar"><span class="stars-label">看多</span><span class="stars-fill bull">★★★★</span><span class="net-verdict verdict-bull">偏多 4/5</span></div>
+<div class="future-hint">
+  ➜ 3 年后（2029）：下一轮减半（2028/4）后 · 历史表明减半后一年是牛市<br>
+  ➜ 美国国债/GDP >120% → 美元长期贬值 → BTC 和黄金共同受益<br>
+  ➜ 唯一的问号：监管。如果美国政府打压 → ETF 被撤回 → 15-20 年重演
+</div>
+</div>
+
+<div class="event-card">
+<div class="event-name">ETH · Layer 2 + 机构化</div>
+<div class="event-detail">L2 交易量已达主网 10x · Coinbase 自己的 L2(Base) 以太坊生态核心</div>
+<div class="stars-bar"><span class="stars-label">看多</span><span class="stars-fill bull">★★★</span><span class="net-verdict verdict-bull">偏多 3/5</span></div>
+<div class="future-hint">➜ 如果 ETH 在 2027-29 年前解决 Gas 费问题 → 真正的世界计算机</div>
+</div>
+</div>
+
+<!-- ETF 杠杆参考 -->
+<div class="month-section">
+<div class="month-title">🔧 加密相关标的 & 杠杆 ETF</div>
+
+<table class="etf-table">
+<tr><th>类 别</th><th>1x / 现货</th><th>做多 2x</th><th>做空 / 反向</th><th>有期权</th></tr>
+<tr><td>BTC 现货 ETF</td><td>IBIT, FBTC, GBTC</td><td>BITX, BITU</td><td>SBIT, BITI (-1x)</td><td>✅ IBIT 最优</td></tr>
+<tr><td>ETH 现货 ETF</td><td>ETHE, ETHV</td><td>ETHU</td><td>ETHD (-1x)</td><td>✅</td></tr>
+<tr><td>MSTR (BTC 杠杆票)</td><td>MSTR</td><td>MSTX</td><td>—</td><td>✅ MSTR 流动性好</td></tr>
+<tr><td>Coinbase (交易所)</td><td>COIN</td><td>CONL</td><td>—</td><td>✅ COIN 流动性好</td></tr>
+<tr><td>矿企</td><td>MARA, RIOT, CLSK</td><td>—</td><td>—</td><td>✅ MARA/RIOT</td></tr>
+</table>
+</div>
+
+<div class="note">
+  💡 <strong>操作 ETF 期权 vs 直接买底层？</strong><br><br>
+  🔑 <strong>答案：操作 IBIT（现货 BTC ETF）的期权。</strong><br><br>
+  不选 ETF（BITX/BITU）：<br>
+  → ❌ 2x ETF 的期权同时承担底层波动+杠杆损耗 → 双重衰减 —— 你买 ASTS CALL 因为标的本身波动够大，不需要 ETF 再叠一层衰减<br><br>
+  不选期货 ETF（BITO）：<br>
+  → ❌ 月度滚仓的 Contango 损耗 → 长期持有就是在流血<br><br>
+  为什么选 IBIT CALL？<br>
+  → ✅ 底层是现货 BTC，无滚仓损耗<br>
+  → ✅ 期权流动性增长极快（BlackRock 坐庄）<br>
+  → ✅ 每周到期，和你的 ASTS CALL 同一节奏<br><br>
+  ⚡ 加密相关个股期权（MSTR/COIN/MARA/RIOT）：<br>
+  → MSTR CALL = BTC 的 1.3x 杠杆 CALL · 波动比 IBIT 大，但你已经在 ASTS 上玩高波了，加 MSTR 是重复押<br>
+  → COIN CALL = 交易所顺周期 · BTC 跌 COIN 必跌更惨<br>
+  → MARA/RIOT CALL = 矿企杠杆 · BTC 涨 5%，矿企涨 15% · 反过来也一样<br><br>
+  📍 <strong>Roy 快速参考：</strong><br>
+  想做多 BTC → 买 <strong>IBIT CALL</strong>（干净、流动、无损耗）<br>
+  想看多 BTC + 加杠杆 → 买 <strong>MSTR CALL</strong> 或 <strong>BITX 正股</strong>（日内，不过夜）<br>
+  想对冲纳指大跌 → BTC 已经跟纳指同步跌，所以做多 BTC CALL <strong>不是</strong>对冲<br>
+  BTC 在宏观压力期跟美股同向 → 你的真正对冲是 <strong>SQQQ CALL + GLD CALL</strong>
+</div>
+
+<div class="refresh">🔄 每周一 08:00 自动更新 · Hermes Agent 维护</div>
+</body>
+</html>

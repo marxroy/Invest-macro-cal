@@ -30,7 +30,6 @@
   h1 { font-size: 22px; margin-bottom: 4px; }
   .subtitle { color: var(--text2); font-size: 13px; margin-bottom: 8px; }
 
-  /* ── Tab 切换 ── */
   .tab-bar {
     display: flex; gap: 0; margin-bottom: 20px;
     background: var(--card); border-radius: 10px; overflow: hidden;
@@ -116,12 +115,13 @@
 <body>
 
 <h1>📊 宏观事件日历</h1>
-<p class="subtitle">更新于 2026-06-08 盘前 · 每周一 08:00 自动刷新</p>
+<p class="subtitle">更新于 2026-06-05 盘后 · 每周一 08:00 自动刷新</p>
 
-<!-- Tab 切换 -->
 <div class="tab-bar">
   <button class="tab-btn active" onclick="switchTab('us')">🇺🇸 美股</button>
   <button class="tab-btn" onclick="switchTab('cn')">🇨🇳 A股</button>
+  <button class="tab-btn" onclick="switchTab('metals')">🥇 贵金属</button>
+  <button class="tab-btn" onclick="switchTab('crypto')">₿ 加密</button>
 </div>
 
 <div class="legend">
@@ -139,13 +139,13 @@
 <!-- ======== 美股 Tab ======== -->
 <div id="tab-us" class="tab-panel active">
 
-<div class="section-label">📌 上周重点回顾 · 6月5日（周四）</div>
+<div class="section-label">⚡ 今天 · 6月5日（周四）</div>
 
-<div class="event-card past">
+<div class="event-card today">
   <div class="event-date"><small>6月</small>5</div>
   <div class="event-info">
-    <div class="event-name">非农 NFP（5月） <span class="badge badge-past">已发布</span></div>
-    <div class="event-detail">实际 <strong style="color:var(--fire)">17.2万</strong> · 大超预期（预估 ~12万）<br><span style="font-size:10px;color:var(--text2)">✅ 6/8 DOL确认 · 评级维持</span></div>
+    <div class="event-name">非农 NFP（5月） <span class="badge badge-today">今日</span></div>
+    <div class="event-detail">实际 <strong style="color:var(--fire)">17.2万</strong> · 大超预期（预估 ~12万）</div>
     <div class="stars-bar">
       <span class="stars-label">看空</span><span class="stars-fill bear">★★★★★</span><span class="net-verdict verdict-bear">强烈看空 5/5</span>
     </div>
@@ -169,11 +169,11 @@
   </div>
 </div>
 
-<div class="event-card past">
+<div class="event-card today">
   <div class="event-date"><small>6月</small>5</div>
   <div class="event-info">
-    <div class="event-name">初请失业金人数 <span class="badge badge-past">已发布</span></div>
-    <div class="event-detail">实际 <strong style="color:var(--fire)">22.5万</strong> · 预期 22.3万 · 前值 21.2万<br><span style="font-size:10px;color:var(--text2)">✅ 6/8 DOL确认 · 评级维持</span></div>
+    <div class="event-name">初请失业金人数 <span class="badge badge-today">今日</span></div>
+    <div class="event-detail">实际 <strong style="color:var(--fire)">22.5万</strong> · 预期 22.3万 · 前值 21.2万</div>
     <div class="stars-bar">
       <span class="stars-label">看空</span><span class="stars-fill bear">★★★</span><span class="stars-empty">★★</span><span class="net-verdict verdict-bear">看空 3/5</span>
     </div>
@@ -218,7 +218,7 @@
 <div class="event-card"><div class="event-date"><small>6月</small>19</div><div class="event-info"><div class="event-name">初请失业金人数</div><div class="event-detail">08:30 ET · 每周四</div></div></div>
 
 <div class="event-card"><div class="event-date"><small>6月</small>25</div><div class="event-info">
-<div class="event-name">PCE 个人消费支出物价指数（5月）</div><div class="event-detail">08:30 ET · 前值 +3.8%（4月）· 趋势：2.9→2.9→3.5→<strong style="color:var(--fire)">3.8</strong> 📈<br><span style="font-size:10px;color:var(--text2)">✅ 6/8 BEA确认 · 连续3月加速</span></div>
+<div class="event-name">PCE 个人消费支出物价指数（5月）</div><div class="event-detail">08:30 ET · 前值 ~3.8%</div>
 <div class="stars-bar"><span class="stars-label">预期</span><span class="stars-fill bear">★★★★</span><span class="stars-empty">★</span><span class="net-verdict verdict-bear">偏空 4/5</span></div>
 <div class="future-hint">➜ PCE>4% = 滞胀确认 → 加息叙事加速</div>
 </div></div>
@@ -239,13 +239,7 @@
   ⭐ <strong>3-4星看空</strong>：仓位 30-50% · 不追高 · 不做隔夜 CALL<br>
   ⭐ <strong>看多星出现</strong>时才可加仓<br><br>
   🔴 6月全月：连续 5 道利空关口 → 保持轻仓<br>
-  ⚡ <strong>下周 6/10 CPI</strong>（48h后）：全年最关键单日 · 预期+3.1%<br>
   🟢 真正做多窗口：FOMC 之后（6/17 14:30）<br><br>
-  ─────────────────<br>
-  <strong>📊 数据核实状态</strong>（6/8 盘前）<br><br>
-  ✅ DOL 初请：225K · 确认无误 · 评级维持<br>
-  ✅ BEA PCE：3.8%（4月）· 趋势加速中 2.9→3.8<br>
-  🔴 BLS（CPI/PPI/NFP）：Access Denied · 6/10 CPI需手动对照<br><br>
   ─────────────────<br>
   <strong>🧬 技术位置修正规则</strong><br><br>
   ⚠️ 跌深→利空被定价→看空减星 · 涨猛→乐观被透支→看多减星<br><br>
@@ -253,10 +247,9 @@
   🟡 偏弱（RSI 30-35）：看空 -1 · 看多 +1<br>
   🟡 中性（RSI 35-65）：不变<br>
   🔴 超买（RSI＞70）：看空 +1 · 看多 <strong>-2星</strong><br><br>
-  📍 今日（6/8 盘前）：SPY $737.55 RSI 42 · QQQ $705 RSI 43 · IWM $281 RSI 47 · VIX 21.5
-  → 🟡 中性偏弱 · QQQ/IWM 触发「轻度超卖」（+0.5 分）· 未到正式超卖
-  → QQQ 两日累跌 -8.6%（NFP日-3.9% + 周五-4.8%）· 短期卖压释放但趋势未改
-  → 看空评级不变 · 若再跌至 RSI<30/VIX>25 → 自动降星
+  📍 今日：SPY RSI 42 · QQQ RSI 43 · VIX 21.5<br>
+  → 🟡 中性偏弱 · 未到超卖 → NFP 5星看空不变<br>
+  → 若下周再跌3%+RSI<30+VIX>25 → 看空自动降为3-4星
 </div>
 
 </div><!-- /tab-us -->
@@ -404,6 +397,170 @@
 </div>
 
 </div><!-- /tab-cn -->
+
+<!-- ======== 贵金属 Tab ======== -->
+<div id="tab-metals" class="tab-panel">
+
+<div class="section-label">💎 实时价格 · 2026-06-06</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">
+  <div style="background:var(--card);border-radius:8px;padding:12px;border:1px solid var(--border)">
+    <div style="font-size:11px;color:var(--text2)">黄金 GC=F</div>
+    <div style="font-size:22px;font-weight:800">$4,343</div>
+    <div style="font-size:13px;color:var(--red);margin-top:2px">-3.6%</div>
+  </div>
+  <div style="background:var(--card);border-radius:8px;padding:12px;border:1px solid var(--border)">
+    <div style="font-size:11px;color:var(--text2)">白银 SI=F</div>
+    <div style="font-size:22px;font-weight:800">$34.25</div>
+    <div style="font-size:13px;color:var(--red);margin-top:2px">-4.1%</div>
+  </div>
+  <div style="background:var(--card);border-radius:8px;padding:12px;border:1px solid var(--border)">
+    <div style="font-size:11px;color:var(--text2)">铜 HG=F</div>
+    <div style="font-size:22px;font-weight:800">$5.21</div>
+    <div style="font-size:13px;color:var(--red);margin-top:2px">-1.8%</div>
+  </div>
+  <div style="background:var(--card);border-radius:8px;padding:12px;border:1px solid var(--border)">
+    <div style="font-size:11px;color:var(--text2)">铝 ALI=F</div>
+    <div style="font-size:22px;font-weight:800">$2,742</div>
+    <div style="font-size:13px;color:var(--red);margin-top:2px">-2.1%</div>
+  </div>
+</div>
+
+<div class="month-section">
+<div class="month-title">🔴 短期（3个月）— 战术层</div>
+<div class="event-card"><div class="event-info">
+<div class="event-name">黄金 · 滞胀买盘 vs 加息抛压</div>
+<div class="event-detail">3月高 $4,505 → $4,343 | RSI 45</div>
+<div class="stars-bar"><span class="stars-label">看多</span><span class="stars-fill bull">★★★</span><span class="net-verdict verdict-bull">偏多 3/5</span></div>
+<div class="future-hint">$4,200 是结构性多空分界线 · 央行还在买 · 但 NFP 后 Fed 鹰派压制短期金价</div>
+</div></div>
+<div class="event-card"><div class="event-info">
+<div class="event-name">铜 · 全球衰退信号</div>
+<div class="event-detail">3月高 $5.80 → $5.21 | 跌破50日线</div>
+<div class="stars-bar"><span class="stars-label">短期看空</span><span class="stars-fill bear">★★★★</span><span class="net-verdict verdict-bear">看空 4/5</span></div>
+<div class="future-hint">中国 PMI<50 + FOMC鹰派 → 铜可能加速下探 $4.80 · 但供应缺口长期存在</div>
+</div></div>
+</div>
+
+<div class="month-section">
+<div class="month-title">🟡 中期（1年）— 周期层</div>
+<div class="event-card"><div class="event-info">
+<div class="event-name">黄金 · 央行购金 + 美元信用</div><div class="event-detail">过去12月全球央行购金 1,000+ 吨</div>
+<div class="stars-bar"><span class="stars-label">偏多</span><span class="stars-fill bull">★★★★</span><span class="net-verdict verdict-bull">偏多 4/5</span></div>
+</div></div>
+<div class="event-card"><div class="event-info">
+<div class="event-name">铜 · 能源转型 + 供应缺口</div><div class="event-detail">2027-2029 年缺口 500-700 万吨</div>
+<div class="stars-bar"><span class="stars-label">长期看多</span><span class="stars-fill bull">★★★★</span><span class="net-verdict verdict-bull">偏多 4/5</span></div>
+<div class="future-hint">短期看空 vs 中期看多 → 最大利润在回调 $4.5-5.0 区间建仓</div>
+</div></div>
+</div>
+
+<div class="month-section">
+<div class="month-title">🟢 远期（3年）— 结构性层</div>
+<div class="event-card"><div class="event-info">
+<div class="event-name">黄金 · 美元信用崩塌</div><div class="event-detail">美国国债 $40万亿+ · 利息支出 > 国防预算</div>
+<div class="stars-bar"><span class="stars-label">强烈看多</span><span class="stars-fill bull">★★★★★</span><span class="net-verdict verdict-bull">强烈看多 5/5</span></div>
+<div class="future-hint">这不是预测是数学：国债/GDP>120%+利率>3% = 不可持续 → 黄金受益</div>
+</div></div>
+</div>
+
+<div class="month-section">
+<div class="month-title">🔧 相关标的 & 期权指引</div>
+<table style="width:100%;font-size:10px;border-collapse:collapse;margin-top:8px">
+<tr><th style="color:var(--text2);text-align:left;padding:4px">类别</th><th style="color:var(--text2);text-align:left;padding:4px">做多</th><th style="color:var(--text2);text-align:left;padding:4px">做多 2x</th><th style="color:var(--text2);text-align:left;padding:4px">做空</th><th style="color:var(--text2);text-align:left;padding:4px">期权</th></tr>
+<tr><td>黄金期货</td><td>GLD</td><td>—</td><td>GLL</td><td>✅ GLD</td></tr>
+<tr><td>金矿股</td><td>GDX</td><td>NUGT</td><td>DUST</td><td>✅ NUGT</td></tr>
+<tr><td>中小金矿</td><td>GDXJ</td><td>JNUG</td><td>JDST</td><td>✅ JNUG</td></tr>
+<tr><td>白银期货</td><td>SLV</td><td>AGQ</td><td>ZSL</td><td>✅ SLV</td></tr>
+<tr><td>铜矿</td><td>COPX</td><td>—</td><td>—</td><td>❌</td></tr>
+<tr><td>铜期货</td><td>CPER</td><td>—</td><td>—</td><td>❌</td></tr>
+<tr><td>铝</td><td>AA</td><td>—</td><td>—</td><td>✅</td></tr>
+</table>
+</div>
+
+<div class="note">
+  💡 <strong>ETF vs 底层标的</strong><br>
+  ✅ 买 <strong>GLD CALL</strong>（流动性最佳）<br>
+  ✅ 买 <strong>NUGT CALL</strong> 日内，收盘平（2x 波动+杠杆=双衰减）<br>
+  ✅ 滞胀长期对冲 → 买 <strong>GLD 6个月 CALL</strong> 放着
+</div>
+
+<div class="refresh">🔄 来源：贵金属追踪 · 每周一更新</div>
+</div><!-- /tab-metals -->
+
+<!-- ======== 加密 Tab ======== -->
+<div id="tab-crypto" class="tab-panel">
+
+<div class="section-label">₿ 实时价格 · 2026-06-06</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">
+  <div style="background:var(--card);border-radius:8px;padding:12px;border:1px solid var(--border)">
+    <div style="font-size:11px;color:var(--text2)">BTC 比特币</div>
+    <div style="font-size:22px;font-weight:800">$63,898</div>
+    <div style="font-size:13px;color:var(--red);margin-top:2px">-7.0% · 与纳指同步</div>
+  </div>
+  <div style="background:var(--card);border-radius:8px;padding:12px;border:1px solid var(--border)">
+    <div style="font-size:11px;color:var(--text2)">ETH 以太坊</div>
+    <div style="font-size:22px;font-weight:800">$1,698</div>
+    <div style="font-size:13px;color:var(--red);margin-top:2px">-8.2% · 跟 BTC</div>
+  </div>
+</div>
+
+<div class="month-section">
+<div class="month-title">🔴 短期（3个月）— 战术层</div>
+<div class="event-card"><div class="event-info">
+<div class="event-name">BTC · 被纳指拖下水</div>
+<div class="event-detail">3月高 $101K → $63.9K | RSI 28 超卖</div>
+<div class="stars-bar"><span class="stars-label">看空</span><span class="stars-fill bear">★★★</span><span class="net-verdict verdict-bear">偏空 3/5（技术超卖减星）</span></div>
+<div class="future-hint">$58K 下一支撑 · 减半后 14 个月（应在23Q4-24Q2见顶）→ 周期可能已被宏观打断</div>
+</div></div>
+<div class="event-card"><div class="event-info">
+<div class="event-name">ETH · 更惨 · 极度超卖</div>
+<div class="event-detail">3月高 $2,950 → $1,698 | RSI 24</div>
+<div class="stars-bar"><span class="stars-label">看空</span><span class="stars-fill bear">★★</span><span class="net-verdict verdict-bear">看空 2/5（超卖减星）</span></div>
+<div class="future-hint">$1,500 结构性底部 · 反弹条件：BTC先稳+纳指不跌</div>
+</div></div>
+</div>
+
+<div class="month-section">
+<div class="month-title">🟡 中期（1年）— 周期层</div>
+<div class="event-card"><div class="event-info">
+<div class="event-name">BTC · ETF 资金流是关键</div><div class="event-detail">现货 ETF 管理 $120B+ · 机构化不可逆</div>
+<div class="stars-bar"><span class="stars-label">偏多</span><span class="stars-fill bull">★★★</span><span class="net-verdict verdict-bull">偏多 3/5</span></div>
+<div class="future-hint">若 ETF 资金恢复流入 → BTC 重返 $80-100K · 减半效应或在24Q2最后一波</div>
+</div></div>
+</div>
+
+<div class="month-section">
+<div class="month-title">🟢 远期（3年）— 结构性层</div>
+<div class="event-card"><div class="event-info">
+<div class="event-name">BTC · 数字黄金 · 下一轮减半</div><div class="event-detail">2028/4 减半 · 历史：减半后一年牛市</div>
+<div class="stars-bar"><span class="stars-label">偏多</span><span class="stars-fill bull">★★★★</span><span class="net-verdict verdict-bull">偏多 4/5</span></div>
+<div class="future-hint">唯一问号：美国监管 · 如果ETF被撤 → 15-20年重演</div>
+</div></div>
+</div>
+
+<div class="month-section">
+<div class="month-title">🔧 加密标的 & 期权指引</div>
+<table style="width:100%;font-size:10px;border-collapse:collapse;margin-top:8px">
+<tr><th style="color:var(--text2);text-align:left;padding:4px">类别</th><th style="color:var(--text2);text-align:left;padding:4px">1x/现货</th><th style="color:var(--text2);text-align:left;padding:4px">杠杆</th><th style="color:var(--text2);text-align:left;padding:4px">做空</th><th style="color:var(--text2);text-align:left;padding:4px">期权</th></tr>
+<tr><td>BTC 现货</td><td>IBIT FBTC</td><td>BITX BITU</td><td>SBIT BITI</td><td>✅ IBIT</td></tr>
+<tr><td>ETH 现货</td><td>ETHE ETHV</td><td>ETHU</td><td>ETHD</td><td>✅</td></tr>
+<tr><td>MSTR</td><td>MSTR</td><td>MSTX</td><td>—</td><td>✅ MSTR</td></tr>
+<tr><td>Coinbase</td><td>COIN</td><td>CONL</td><td>—</td><td>✅ COIN</td></tr>
+<tr><td>矿企</td><td>MARA RIOT</td><td>—</td><td>—</td><td>✅</td></tr>
+</table>
+</div>
+
+<div class="note">
+  💡 <strong>ETF vs 底层标的</strong><br>
+  ✅ 做多 BTC → <strong>IBIT CALL</strong>（现货、无滚仓损耗、流动性暴增）<br>
+  ⚠️ BITX/BITU → 2x 杠杆+衰减 → 日内不过夜<br>
+  ⚠️ MSTR CALL → BTC 的 1.3x 杠杆 CALL · 叠加你 ASTS 的高波=重复押<br>
+  ⚠️ BTC 在宏观压力期跟纳指同向 → 做多 BTC <strong>不是</strong>SQQQ 的替代对冲<br>
+  → 真正对冲是 <strong>SQQQ CALL + GLD CALL</strong>
+</div>
+
+<div class="refresh">🔄 来源：加密货币追踪 · 每周一更新</div>
+</div><!-- /tab-crypto -->
 
 <div class="refresh">
   🔄 每周一 08:00 自动更新 · Hermes Agent 维护 · 本地 http://192.168.0.127:8888

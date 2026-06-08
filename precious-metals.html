@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>🥇 贵金属追踪</title>
+<style>
+  :root {
+    --bg: #0f1117; --card: #1a1d2e; --border: #2a2d3e;
+    --text: #e1e4e8; --text2: #8b949e;
+    --red: #ff6b6b; --green: #3fb950; --yellow: #d2991d;
+    --accent: #58a6ff; --fire: #ff4444; --gold: #f0b90b;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); padding: 16px; max-width: 600px; margin: 0 auto; line-height: 1.5; }
+  h1 { font-size: 20px; margin-bottom: 2px; }
+  .subtitle { color: var(--text2); font-size: 12px; margin-bottom: 12px; }
+
+  .nav-bar { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+  .nav-link { padding: 6px 14px; border-radius: 16px; font-size: 12px; font-weight: 600; text-decoration: none; background: var(--card); color: var(--text2); border: 1px solid var(--border); }
+  .nav-link.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  .section-label { font-size: 11px; text-transform: uppercase; color: var(--text2); margin-bottom: 12px; font-weight: 600; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+  .price-card { background: var(--card); border-radius: 8px; padding: 12px; border: 1px solid var(--border); }
+  .price-card .sym { font-size: 11px; color: var(--text2); margin-bottom: 2px; }
+  .price-card .price { font-size: 22px; font-weight: 800; }
+  .price-card .chg { font-size: 13px; margin-top: 2px; }
+  .chg-up { color: var(--green); } .chg-down { color: var(--red); }
+
+  .month-section { margin-bottom: 22px; }
+  .month-title { font-size: 15px; font-weight: 700; padding: 8px 12px; background: var(--card); border-radius: 8px; margin-bottom: 8px; border-left: 3px solid var(--gold); }
+  .event-card { background: var(--card); border-radius: 8px; padding: 10px 12px; margin-bottom: 6px; border: 1px solid var(--border); }
+  .event-name { font-weight: 600; font-size: 14px; }
+  .event-detail { font-size: 11px; color: var(--text2); margin-top: 2px; }
+  .future-hint { font-size: 11px; color: var(--green); margin-top: 3px; }
+
+  .stars-bar { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 12px; font-weight: 700; }
+  .stars-label { font-size: 10px; color: var(--text2); }
+  .stars-fill { letter-spacing: 1px; }
+  .stars-fill.bear { color: var(--fire); }
+  .stars-fill.bull { color: var(--green); }
+  .net-verdict { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; margin-left: 4px; }
+  .verdict-bear { background: rgba(255,68,68,0.15); color: var(--fire); }
+  .verdict-bull { background: rgba(63,185,80,0.15); color: var(--green); }
+
+  .note { font-size: 11px; color: var(--text2); padding: 10px; background: var(--card); border-radius: 8px; margin-top: 8px; }
+  .etf-table { width: 100%; font-size: 11px; border-collapse: collapse; margin-top: 8px; }
+  .etf-table td, .etf-table th { padding: 4px 6px; text-align: left; border-bottom: 1px solid var(--border); }
+  .etf-table th { color: var(--text2); font-weight: 500; }
+  .refresh { text-align: center; font-size: 10px; color: var(--text2); margin-top: 20px; padding-bottom: 20px; }
+</style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <span style="color:var(--gold);font-weight:700;margin-right:8px;">📊 宏观日历</span>
+  <a href="index.html" class="nav-link">🇺🇸 美股</a>
+  <a href="index.html#tab-cn" class="nav-link">🇨🇳 A股</a>
+  <a href="precious-metals.html" class="nav-link active">🥇 贵金属</a>
+  <a href="crypto.html" class="nav-link">₿ 加密</a>
+</div>
+
+<h1>🥇 贵金属 & 大宗商品</h1>
+<p class="subtitle">更新于 2026-06-06 · 每周一 08:00 自动刷新</p>
+
+<div class="section-label">💎 实时价格</div>
+<div class="grid">
+  <div class="price-card"><div class="sym">黄金 GC=F</div><div class="price">$4,343</div><div class="chg chg-down">-3.6%</div></div>
+  <div class="price-card"><div class="sym">白银 SI=F</div><div class="price">$34.25</div><div class="chg chg-down">-4.1%</div></div>
+  <div class="price-card"><div class="sym">铜 HG=F</div><div class="price">$5.21</div><div class="chg chg-down">-1.8%</div></div>
+  <div class="price-card"><div class="sym">铝 ALI=F</div><div class="price">$2,742</div><div class="chg chg-down">-2.1%</div></div>
+  <div class="price-card"><div class="sym">铂 PL=F</div><div class="price">$1,148</div><div class="chg chg-up">+0.6%</div></div>
+  <div class="price-card"><div class="sym">钯 PA=F</div><div class="price">$1,346</div><div class="chg chg-down">-1.3%</div></div>
+</div>
+
+<!-- Short-term: 3 months -->
+<div class="month-section">
+<div class="month-title">🔴 短期（3 个月滚动）— 战术层</div>
+
+<div class="event-card">
+<div class="event-name">黄金 · 避险 vs 加息</div>
+<div class="event-detail">3月高 $4,505 → 当前 $4,343（-3.6%）| RSI 45 | 距3月高 -4%</div>
+<div class="stars-bar"><span class="stars-label">看多</span><span class="stars-fill bull">★★★</span><span class="net-verdict verdict-bull">偏多 3/5</span></div>
+<div class="future-hint">
+  ➜ NFP 大超预期后黄金被抛售（Fed 不降息=黄金失去低利率逻辑）<br>
+  ➜ 但伊朗战争 + PCE 逼近 4% = 滞胀买盘的底层逻辑没变<br>
+  ➜ $4,200 是结构性多空分界线 · 跌破看空，站稳看多
+</div>
+</div>
+
+<div class="event-card">
+<div class="event-name">白银 · 工业 + 避险双驱动</div>
+<div class="event-detail">3月高 $42 → 当前 $34.25（-18%）| 更快被抛售</div>
+<div class="stars-bar"><span class="stars-label">看空</span><span class="stars-fill bear">★★★</span><span class="net-verdict verdict-bear">偏空 3/5</span></div>
+<div class="future-hint">
+  ➜ 白银在衰退预期下被当作工业金属卖出 · 金/银比已到 127<br>
+  ➜ 如果全球衰退预期加剧 → 白银可能补跌到 $30
+</div>
+</div>
+
+<div class="event-card">
+<div class="event-name">铜 · 全球经济温度计</div>
+<div class="event-detail">3月高 $5.80 → 当前 $5.21（-10%）| 跌破 50 日线</div>
+<div class="stars-bar"><span class="stars-label">看空</span><span class="stars-fill bear">★★★★</span><span class="net-verdict verdict-bear">看空 4/5</span></div>
+<div class="future-hint">
+  ➜ 铜博士在说：全球经济在减速<br>
+  ➜ 中国 PMI 若跌破 50 + FOMC 鹰派 → 铜可能加速下探 $4.80
+</div>
+</div>
+
+<div class="event-card">
+<div class="event-name">铝 · 中国需求主导</div>
+<div class="event-detail">3月高 $3,120 → 当前 $2,742（-12%）</div>
+<div class="stars-bar"><span class="stars-label">看空</span><span class="stars-fill bear">★★★</span><span class="net-verdict verdict-bear">偏空 3/5</span></div>
+<div class="future-hint">
+  ➜ 中国制造业疲软 + 全球衰退预期 = 铝罐茶
+</div>
+</div>
+</div>
+
+<!-- Mid-term: 1 year -->
+<div class="month-section">
+<div class="month-title">🟡 中期（1 年周期）— 周期层</div>
+
+<div class="event-card">
+<div class="event-name">黄金 · 央行购金 + 美元信用</div>
+<div class="event-detail">过去12个月央行购金量超过 1,000 吨 · 历史最高</div>
+<div class="stars-bar"><span class="stars-label">看多</span><span class="stars-fill bull">★★★★</span><span class="net-verdict verdict-bull">偏多 4/5</span></div>
+<div class="future-hint">
+  ➜ 全球央行（尤其是中国、波兰）持续买黄金 = 结构性的去美元化<br>
+  ➜ 美联储若在 2026-27 年被迫加息 → 美元短期走强 → 金价承压<br>
+  ➜ 但只要央行还在买，金价 12 个月支撑位在 $3,800
+</div>
+</div>
+
+<div class="event-card">
+<div class="event-name">铜 · 能源转型 + 供应缺口</div>
+<div class="event-detail">全球铜矿资本支出在 2013 年见顶后持续走低 · 新矿投产周期 7-10 年</div>
+<div class="stars-bar"><span class="stars-label">看多</span><span class="stars-fill bull">★★★★</span><span class="net-verdict verdict-bull">偏多 4/5</span></div>
+<div class="future-hint">
+  ➜ 供应端：2027-2029 年将出现严重缺口 → 铜价长期看涨<br>
+  ➜ 短期（3-6月）看空 VS 中期（1-3年）看多 = 最大的利润区在回调后的买点<br>
+  ➜ $4.50-5.00 区间是长期建仓的好位置
+</div>
+</div>
+
+<div class="event-card">
+<div class="event-name">白银 · 太阳能的不可替代性</div>
+<div class="event-detail">白银是光伏电池板不可替代的导电材料 · 2026 光伏装机再增 30%</div>
+<div class="stars-bar"><span class="stars-label">看多</span><span class="stars-fill bull">★★★</span><span class="net-verdict verdict-bull">偏多 3/5</span></div>
+<div class="future-hint">
+  ➜ 金/银比 127 是 5 年高位 · 均值回归概率高 → 白银补涨空间大<br>
+  ➜ 等铜博士确认全球经济触底后，白银是反弹最猛的
+</div>
+</div>
+</div>
+
+<!-- Long-term: 3 years -->
+<div class="month-section">
+<div class="month-title">🟢 远期（3 年）— 结构性层</div>
+
+<div class="event-card">
+<div class="event-name">黄金 · 美元信用崩塌叙事</div>
+<div class="event-detail">美国国债 $40 万亿+ · 利息支出 > 国防预算 · 全球去美元化</div>
+<div class="stars-bar"><span class="stars-label">看多</span><span class="stars-fill bull">★★★★★</span><span class="net-verdict verdict-bull">强烈看多 5/5</span></div>
+<div class="future-hint">
+  ➜ 3 年后（2029）：美国可能进入财政主导时代 = 美元长期贬值 = 黄金受益<br>
+  ➜ 这不是预测是数学：国债/GDP > 120% + 利率 > 3% = 不可持续<br>
+  ➜ 对应 ETFs：<strong>GLD, IAU, GDX, GDXJ</strong> | 上杠杆：<strong>NUGT（2x 金矿）</strong>
+</div>
+</div>
+
+<div class="event-card">
+<div class="event-name">铜 · 电气化不可逆</div>
+<div class="event-detail">全球电网升级 + 电动车 + AI 数据中心 = 铜需求年增 4-5%</div>
+<div class="stars-bar"><span class="stars-label">看多</span><span class="stars-fill bull">★★★★</span><span class="net-verdict verdict-bull">偏多 4/5</span></div>
+<div class="future-hint">
+  ➜ 唯一的问题不是需求，是供应跟不上 → 2029 年有 500-700 万吨缺口<br>
+  ➜ 3 年期：现在是跌出来的买点 · 标的选择：<strong>COPX（铜矿 ETF）, CPER（铜期货 ETF）</strong>
+</div>
+</div>
+</div>
+
+<!-- ETF 杠杆参考 -->
+<div class="month-section">
+<div class="month-title">🔧 相关标的 & 杠杆 ETF</div>
+
+<table class="etf-table">
+<tr><th>类 别</th><th>做多</th><th>做多 2x</th><th>做空/反向</th><th>有期权</th></tr>
+<tr><td>黄金期货</td><td>GLD</td><td>—</td><td>GLL (-1x)</td><td>✅</td></tr>
+<tr><td>金矿股</td><td>GDX</td><td>NUGT</td><td>DUST (-2x)</td><td>✅ NUGT</td></tr>
+<tr><td>中小金矿</td><td>GDXJ</td><td>JNUG</td><td>JDST (-2x)</td><td>✅ JNUG</td></tr>
+<tr><td>头部金矿</td><td>NEM, GOLD</td><td>—</td><td>—</td><td>✅ NEM</td></tr>
+<tr><td>白银期货</td><td>SLV</td><td>AGQ</td><td>ZSL (-2x)</td><td>✅ SLV</td></tr>
+<tr><td>铜矿</td><td>COPX</td><td>—</td><td>—</td><td>❌</td></tr>
+<tr><td>铜期货</td><td>CPER</td><td>—</td><td>—</td><td>❌</td></tr>
+<tr><td>铝</td><td>AA</td><td>—</td><td>—</td><td>✅</td></tr>
+<tr><td>铂</td><td>PPLT</td><td>—</td><td>—</td><td>❌</td></tr>
+<tr><td>钯</td><td>PALL</td><td>—</td><td>—</td><td>❌</td></tr>
+</table>
+</div>
+
+<div class="note">
+  💡 <strong>ETF 期权 vs 底层标的期权？</strong><br><br>
+  🔑 <strong>答案：开 ETF 期权，不开底层期货或正股的。</strong><br>
+  → 理由①：GLD / SLV / GDX 的期权流动性远高于期货期权（每周到期、价差窄）<br>
+  → 理由②：你已经在 ASTS 和 MU 上玩高 IV 单票 CALL，不需要再加期货的保证金和交割复杂度<br>
+  → 理由③：NUGT（2x 金矿）和 AGQ（2x 白银）有期权但 <strong>价差宽+IV 极高</strong>——只适合日内，不过夜<br>
+  <br>
+  📍 <strong>Roy 快速参考：</strong><br>
+  想做多黄金回调 → 买 <strong>GLD CALL</strong>（流动性最佳）<br>
+  想加杠杆做多金矿 → 买 <strong>NUGT 日内 CALL</strong>，收盘前必须平<br>
+  想对冲滞胀风险 → 买 <strong>GLD 6个月 CALL</strong> 放着不动
+</div>
+
+<div class="refresh">🔄 每周一 08:00 自动更新 · Hermes Agent 维护</div>
+</body>
+</html>
