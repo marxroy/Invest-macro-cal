@@ -97,15 +97,17 @@
 <div class="section-label">🔥 年化 >11% 的高收益标的</div>
 
 <table class="etf-table">
-<tr><th>代码</th><th>名称</th><th>类型</th><th>年化 ≈</th><th>派息</th><th>本金风险</th><th>策略</th></tr>
-<tr><td><strong>FEPI</strong></td><td>REX FANG &amp; Innovation Covered Call</td><td>FANG+卖CALL</td><td style="color:var(--green)">~28-35%</td><td>🕐 月</td><td style="color:var(--yellow)">中高</td><td>$48-52 区间加仓</td></tr>
-<tr><td><strong>AIPI</strong></td><td>REX AI &amp; Innovation Covered Call</td><td>AI股+卖CALL</td><td style="color:var(--green)">~30-40%</td><td>🕐 月</td><td style="color:var(--red)">高</td><td>小额<5%，不重仓</td></tr>
-<tr><td><strong>SVOL</strong></td><td>Simplify Short VIX</td><td>做空波动率</td><td>~16%</td><td>🕐 月</td><td style="color:var(--yellow)">中等</td><td>$18-20 建仓</td></tr>
-<tr><td><strong>PDI</strong></td><td>PIMCO Dynamic Income</td><td>多资产收益</td><td>~14%</td><td>🕐 月</td><td style="color:var(--green)">低</td><td>定投，不择时</td></tr>
-<tr><td><strong>PTY</strong></td><td>PIMCO Corp &amp; Inc</td><td>企业债+收益</td><td>~12%</td><td>🕐 月</td><td style="color:var(--green)">低</td><td>定投，基准级</td></tr>
-<tr><td><strong>PFFA</strong></td><td>Virtus Preferred</td><td>优先股 ETF</td><td>~12%</td><td>🕐 月</td><td style="color:var(--yellow)">中低</td><td>利率↑时承压</td></tr>
-<tr><td><strong>AGNC</strong></td><td>AGNC Investment</td><td>抵押 REIT</td><td>~14%</td><td>🕐 月</td><td style="color:var(--red)">高</td><td>波段，不长期</td></tr>
-<tr><td><strong>O</strong></td><td>Realty Income</td><td>月度 REIT</td><td>~10%</td><td>🕐 月</td><td style="color:var(--green)">很低</td><td>定投，每收息</td></tr>
+<tr><th>代码</th><th>名称</th><th>策略解释</th><th>年化 ≈</th><th>派息</th><th>本金风险</th><th>操作</th></tr>
+<tr><td><strong>QDTE</strong></td><td>Roundhill S&P 0DTE Covered Call</td><td>持有标普500成分股，<strong>每天</strong>卖出0DTE虚值CALL收权利金 → 权利金=分红来源。大盘不暴涨就稳稳收息</td><td style="color:var(--green)">~25-35%</td><td>🕐 周</td><td style="color:var(--yellow)">中低</td><td>$37-36 加仓</td></tr>
+<tr><td><strong>XQQI</strong></td><td>iShares Nasdaq Premium Income</td><td>持有纳斯达克100成分股，<strong>每月</strong>卖出虚值CALL收权利金。底层的波动比标普大 → 收的权利金更多</td><td style="color:var(--green)">~20-28%</td><td>🕐 月</td><td style="color:var(--yellow)">中</td><td>$53-54 加仓</td></tr>
+<tr><td><strong>FEPI</strong></td><td>REX FANG Covered Call</td><td>持有META/AAPL/AMZN/NFLX/GOOGL/MSFT等FANG+巨头，<strong>每月</strong>卖虚值CALL。底层全是Roy爱的高弹性科技股，涨时跟涨，跌时用25%+股息护体</td><td style="color:var(--green)">~28-35%</td><td>🕐 月</td><td style="color:var(--yellow)">中高</td><td>$48-52 加仓</td></tr>
+<tr><td><strong>AIPI</strong></td><td>REX AI Covered Call</td><td>持有NVDA/AVGO/AMD等AI芯片股，<strong>每月</strong>卖虚值CALL。底层比FEPI更集中更疯 → 股息最高但净值波动也最大</td><td style="color:var(--green)">~30-40%</td><td>🕐 月</td><td style="color:var(--red)">高</td><td><5%，不重仓</td></tr>
+<tr><td><strong>SVOL</strong></td><td>Simplify Short VIX</td><td>做空VIX期货+持有债券收息。股市平静(VIX低)时稳稳收16%；VIX暴涨时跌 ← 本质是<strong>卖保险</strong>，平常收保费，黑天鹅时赔钱</td><td>~16%</td><td>🕐 月</td><td style="color:var(--yellow)">中等</td><td>$18-20 建仓</td></tr>
+<tr><td><strong>PDI</strong></td><td>PIMCO Dynamic Income</td><td>PIMCO明星债基，配置全球企业债+新兴市场债+机构MBS。用杠杆放大债券收益 → 14%来自债券而不是股票（跟股市不相关）</td><td>~14%</td><td>🕐 月</td><td style="color:var(--green)">低</td><td>定投，不择时</td></tr>
+<tr><td><strong>PTY</strong></td><td>PIMCO Corporate Income</td><td>类似PDI但更偏美国投资级企业债（更稳更保守）。12%年化 + 每月派息 → Roy的现金替代品</td><td>~12%</td><td>🕐 月</td><td style="color:var(--green)">低</td><td>定投，基准级</td></tr>
+<tr><td><strong>PFFA</strong></td><td>Virtus Preferred</td><td>持有银行/保险/公用事业发行的优先股。优先股=介于股票和债券之间 → 固定股息+优先于普通股分红</td><td>~12%</td><td>🕐 月</td><td style="color:var(--yellow)">中低</td><td>利率↑承压</td></tr>
+<tr><td><strong>AGNC</strong></td><td>AGNC Investment</td><td>抵押REIT：借钱买政府担保的MBS，赚利差。利率稳=利差大=14%稳收；利率波动=本金跟着MBS价格波动</td><td>~14%</td><td>🕐 月</td><td style="color:var(--red)">高</td><td>波段，不长期</td></tr>
+<tr><td><strong>O</strong></td><td>Realty Income</td><td>商业地产REIT：持有沃尔格林/Walmart/7-Eleven等租客的物业收租。租金=股息来源 → 跟你股市持仓完全不相关</td><td>~10%</td><td>🕐 月</td><td style="color:var(--green)">很低</td><td>定投，收息</td></tr>
 </table>
 
 <div class="section-label" style="margin-top:20px">🏗️ Covered Call ETF（底层+卖 CALL = 高分红）</div>
@@ -172,8 +174,19 @@
   -> 高股息 = 只玩正股。想要期权放大收益 = 用纳指/SQQQ/贵金属那一套<br><br>
   <strong>Q：回调到什么位置可以大胆加？</strong><br>
   QDTE: -8~-10% &#124; XQQI: -8~-12% &#124; SVOL: -15~-20% &#124; PDI: -5% 以上就买 &#124; PTY: -5% 以上就买<br><br>
-  <strong>📐 Roy 高股息仓位分配建议：</strong><br>
-  QDTE 40% + XQQI 20% + SVOL 15% + PDI 15% + PTY 10% = 年化 ≈ 18-22%
+  <strong>📐 Roy 高股息仓位分配（Hermes 建议 → 待 Roy 确认）</strong><br><br>
+  ┌────────┬──────┬──────────────────────────────────┐<br>
+  │ <strong>标的</strong>   │ <strong>比例</strong>  │ <strong>定位</strong>                              │<br>
+  ├────────┼──────┼──────────────────────────────────┤<br>
+  │ FEPI   │ 30%  │ 🔥 核心引擎：FANG+底层+25%息率，涨跟涨跌有股息护体 │<br>
+  │ QDTE   │ 25%  │ 💵 周息印钞机：每周派息滚雪球，标普500稳定性最强   │<br>
+  │ XQQI   │ 15%  │ 🚀 纳指卫星：跟FEPI错开底层，波动更大收息更多       │<br>
+  │ SVOL   │ 10%  │ 🛡️ VIX保险单：平常收16%，VIX飙升时跟股市反向       │<br>
+  │ PDI/PTY│ 20%  │ 🏦 债券垫：14%+12%年化，跟股市不相关，纯防御层     │<br>
+  └────────┴──────┴──────────────────────────────────┘<br>
+  → 年化预期 ≈ <strong>20-24%</strong> · 每月收息约占总资产 1.7-2%<br>
+  → FEPI 主打「弹性+收息」、QDTE 主打「频率+稳定」、SVOL 对冲黑天鹅<br>
+  ⚠️ 这只是初始建议。你调比例，我改。
 </div>
 
 <div class="refresh">🔄 每周一自动更新 · Hermes Agent 维护</div>
